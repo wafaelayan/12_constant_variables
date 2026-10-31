@@ -125,7 +125,7 @@
                             <span class="bg-blue-900/80 text-blue-200 text-xs md:text-sm px-3.5 py-1 rounded-full font-bold border border-blue-700">الأسبوع السادس • الباب الثالث</span>
                             <span class="text-yellow-400 text-xs md:text-sm font-bold bg-yellow-400/10 px-3 py-0.5 rounded-full border border-yellow-400/30">مراحل بناء البرنامج</span>
                         </div>
-                        <h1 class="text-2xl md:text-3xl font-black text-white mt-1 tracking-wide">تابع: المتغيرات + الثوابت</h1>
+                        <h1 class="text-base sm:text-lg md:text-xl font-extrabold text-white mt-1 tracking-wide">تابع: المتغيرات + الثوابت</h1>
                         <div class="mt-1 flex items-center gap-2">
                             <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs md:text-sm font-black px-3.5 py-1 rounded-lg shadow-sm">
                                 👩‍🏫 إعداد وتصميم: أ. وفاء عليان - قسم الحاسوب
@@ -665,13 +665,13 @@
                     <span class="text-sm bg-amber-900/80 text-amber-200 font-bold px-3.5 py-1 rounded-full font-code border border-amber-600">Form4_Load</span>
                 </div>
                 <p class="text-slate-200 text-lg leading-relaxed font-semibold">
-                    انتقل للنموذج الرابع «Form4» واكتب التعليمات البرمجية على النموذج لتظهر النتيجة عند فتح النموذج (دمج اسم الطالبة sname مع درجتها sgrade):
+                    انتقل للنموذج الرابع «Form4» واكتب التعليمة البرمجية على النموذج لتظهر قيمة النتيجة (الدرجة sgrade أو الاسم sname) داخل كائن العنوان Label1 عند فتح النموذج:
                 </p>
 
                 <div class="code-block rounded-2xl p-6 shadow-2xl">
                     <span class="syn-kw">Private Sub</span> Form4_Load(...) <span class="syn-kw">Handles MyBase.Load</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' دمج الاسم والدرجة في عنوان Label1 بمعامل الربط (&):</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-var">Label1.Text =</span> <input id="q8_1" type="text" placeholder="اكتبي جملة الدمج النصي هنا..." class="code-input w-full max-w-3xl rounded-xl mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' تخصيص قيمة المتغير (sgrade أو sname) لخاصية النص Label1.Text:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-var">Label1.Text =</span> <input id="q8_1" type="text" placeholder="اكتبي اسم المتغير هنا (sgrade أو sname)..." class="code-input w-full max-w-md rounded-xl mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Sub</span>
                 </div>
 
@@ -948,7 +948,7 @@
                     </div>
                     <div class="bg-slate-950/90 px-6 py-4 rounded-2xl border border-slate-700 text-center min-w-[200px] shadow-lg">
                         <div class="text-sm text-slate-400 font-bold mb-1">نقاط التقويم الختامي</div>
-                        <div id="summaryScoreDisplay" class="text-4xl font-black text-emerald-400 font-code">0 / 6</div>
+                        <div id="summaryScoreDisplay" class="text-4xl font-black text-emerald-400 font-code">0 / 4</div>
                         <span class="text-xs text-slate-400 mt-1 block">أجيبي وتحققي من فهمك</span>
                     </div>
                 </div>
@@ -1005,16 +1005,6 @@
                     </div>
                 </div>
 
-                <!-- Event Question 3 -->
-                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
-                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
-                        <span class="text-emerald-400">3.</span> أكملي اسم الحدث الناقص في سطر تعريف الإجراء الفرعي الخاص بزر الخروج Button1:
-                    </h4>
-                    <div class="code-block rounded-xl p-4 text-base md:text-lg">
-                        <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.<input id="event_q3_input" type="text" placeholder="اسم الحدث..." class="code-input w-44 rounded-lg mx-2 text-center" autocomplete="off" spellcheck="false">
-                    </div>
-                </div>
-
                 <div class="flex items-center justify-between pt-2">
                     <button onclick="checkEventQuestions()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
                         ✓ تحقق من أسئلة الأحداث
@@ -1035,7 +1025,7 @@
                 <!-- True / False Question 1 -->
                 <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
                     <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
-                        <span class="text-yellow-400">4.</span> «قيمة الثابت Constant يمكن تغييرها أثناء تنفيذ البرنامج عن طريق تعليمة تخصيص جديدة»:
+                        <span class="text-yellow-400">3.</span> «قيمة الثابت Constant يمكن تغييرها أثناء تنفيذ البرنامج عن طريق تعليمة تخصيص جديدة»:
                     </h4>
                     <div class="flex flex-wrap gap-4">
                         <label class="flex items-center gap-3 px-6 py-2.5 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
@@ -1052,7 +1042,7 @@
                 <!-- Multi-choice Question 2 -->
                 <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
                     <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
-                        <span class="text-yellow-400">5.</span> للإعلان عن متغير متاح على مستوى كافة نماذج المشروع، نستخدم الكلمة المفتاحية:
+                        <span class="text-yellow-400">4.</span> للإعلان عن متغير متاح على مستوى كافة نماذج المشروع، نستخدم الكلمة المفتاحية:
                     </h4>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-blue-500 transition">
@@ -1071,17 +1061,6 @@
                             <input type="radio" name="lesson_q5" value="Me" class="accent-blue-500 w-5 h-5">
                             <span class="font-code font-bold text-lg text-slate-200">Me</span>
                         </label>
-                    </div>
-                </div>
-
-                <!-- Text-input Question 3 -->
-                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
-                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
-                        <span class="text-yellow-400">6.</span> اكتبي المعامل البرمجي المستخدم للدمج والربط بين النصوص والمتغيرات في Visual Basic (مثل دمج sname و sgrade):
-                    </h4>
-                    <div class="flex flex-wrap items-center gap-4">
-                        <input id="lesson_q6_input" type="text" placeholder="اكتبي الرمز أو المعامل هنا..." class="code-input w-full sm:w-64 rounded-xl text-center text-xl" autocomplete="off" spellcheck="false">
-                        <span class="text-slate-400 text-sm font-semibold">تلميح: يُكتب على لوحة المفاتيح عبر Shift + 7</span>
                     </div>
                 </div>
 
@@ -1242,8 +1221,8 @@
 
         // Summary & Closure Tab State and Checks
         const summaryScoreState = {
-            eq1: false, eq2: false, eq3: false,
-            lq4: false, lq5: false, lq6: false
+            eq1: false, eq2: false,
+            lq4: false, lq5: false
         };
 
         function updateSummaryScore() {
@@ -1260,20 +1239,11 @@
             const r2 = document.querySelector('input[name="event_q2"]:checked');
             const isQ2Ok = r2 && r2.value === 'Load';
 
-            const q3Input = clean(document.getElementById('event_q3_input').value);
-            const isQ3Ok = q3Input === 'click';
-
-            const elInput = document.getElementById('event_q3_input');
-            if (elInput) {
-                elInput.className = `code-input w-44 rounded-lg mx-2 text-center ${isQ3Ok ? 'correct-answer' : 'wrong-answer'}`;
-            }
-
             summaryScoreState.eq1 = isQ1Ok;
             summaryScoreState.eq2 = isQ2Ok;
-            summaryScoreState.eq3 = isQ3Ok;
             updateSummaryScore();
 
-            const allEventsOk = isQ1Ok && isQ2Ok && isQ3Ok;
+            const allEventsOk = isQ1Ok && isQ2Ok;
             if (allEventsOk) {
                 setFeedback('feedback-events', true, 'إجابات ممتازة! تم استيعاب مفهوم الحدث (Click للزر و Load للنموذج) بشكل رائع 100%.');
             } else {
@@ -1288,24 +1258,15 @@
             const r5 = document.querySelector('input[name="lesson_q5"]:checked');
             const isQ5Ok = r5 && r5.value === 'Public';
 
-            const v6 = (document.getElementById('lesson_q6_input').value || '').trim();
-            const isQ6Ok = v6.includes('&') || clean(v6) === 'ampersand' || clean(v6) === 'and';
-
-            const el6 = document.getElementById('lesson_q6_input');
-            if (el6) {
-                el6.className = `code-input w-64 rounded-xl text-center text-xl ${isQ6Ok ? 'correct-answer' : 'wrong-answer'}`;
-            }
-
             summaryScoreState.lq4 = isQ4Ok;
             summaryScoreState.lq5 = isQ5Ok;
-            summaryScoreState.lq6 = isQ6Ok;
             updateSummaryScore();
 
-            const allLessonOk = isQ4Ok && isQ5Ok && isQ6Ok;
+            const allLessonOk = isQ4Ok && isQ5Ok;
             if (allLessonOk) {
-                setFeedback('feedback-lesson-info', true, 'أحسنتِ! تم الإجابة على جميع أسئلة معلومات الدرس بنجاح تام.');
+                setFeedback('feedback-lesson-info', true, 'أحسنتِ! تم الإجابة على أسئلة معلومات الدرس بنجاح تام.');
             } else {
-                setFeedback('feedback-lesson-info', false, 'تأكدي من: الثابت لا تتغير قيمته، والمتغير العام يُعلن عنه بـ Public، ومعامل الربط هو (&).');
+                setFeedback('feedback-lesson-info', false, 'تأكدي من: الثابت لا تتغير قيمته، والمتغير العام يُعلن عنه بـ Public.');
             }
         }
 
@@ -1654,14 +1615,15 @@
 
         function checkQ8() {
             const v = clean(document.getElementById('q8_1').value);
-            const ok = v.includes('sname') && v.includes('sgrade') && v.includes('&');
-            document.getElementById('q8_1').className = `code-input w-full max-w-3xl rounded-xl mx-2 my-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
+            // Accepts assigning either the score (sgrade) or the name (sname) to Label1.Text
+            const ok = v === 'sgrade' || v === 'sname';
+            document.getElementById('q8_1').className = `code-input w-full max-w-md rounded-xl mx-2 my-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
 
             if (ok) {
-                setFeedback('feedback-q8', true, 'ممتاز! تم ربط المتغيرات بمعامل الربط النصي (&).');
+                setFeedback('feedback-q8', true, 'ممتاز! تم تخصيص قيمة المتغير لكائن العنوان Label1 بنجاح.');
                 completedQuestions.q8 = true;
             } else {
-                setFeedback('feedback-q8', false, 'تأكدي من استخدام معامل الربط (&) لدمج اسم الطالبة مع درجتها');
+                setFeedback('feedback-q8', false, 'اكتبي اسم المتغير المطلوب إظهاره: إما sgrade أو sname');
                 completedQuestions.q8 = false;
             }
             updateProgress();
@@ -1702,7 +1664,7 @@
             document.getElementById('q7_2').value = 'Form4.Show()';
             document.getElementById('q7_3').value = 'MsgBox("إجابة غير صحيحة")';
 
-            document.getElementById('q8_1').value = 'sname & " حصلت على درجة " & sgrade';
+            document.getElementById('q8_1').value = 'sgrade';
             document.getElementById('q9_1').value = 'End';
 
             checkQ3(); checkQ4(); checkQ5(); checkQ6(); checkQ7(); checkQ8(); checkQ9();
@@ -1775,9 +1737,9 @@
                 title.innerText = 'النتيجة - Form4';
                 body.innerHTML = `
                     <div class="w-full space-y-5">
-                        <div class="text-sm text-slate-500 font-code font-bold">حدث Form4_Load قام بربط sname & sgrade في Label1</div>
+                        <div class="text-sm text-slate-500 font-code font-bold">حدث Form4_Load قام بعرض قيمة المتغير في Label1</div>
                         <div class="bg-yellow-50 border-2 border-yellow-400 p-6 rounded-2xl text-slate-900 font-bold text-xl shadow-sm">
-                            <span class="text-blue-800 text-3xl font-black">${simState.sname || 'فاطمة'}</span> حصلت على درجة : <span class="text-emerald-700 text-4xl font-black">${simState.sgrade} / 2</span>
+                            درجة المتعلم (sgrade) الظاهرة في Label1 هي : <span class="text-emerald-700 text-4xl font-black">${simState.sgrade} / 2</span>
                         </div>
                         <div>
                             <button onclick="simExit()" class="px-10 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-black text-lg shadow transition active:scale-95">
