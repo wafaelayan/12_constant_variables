@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مادة تقنية المعلومات - الصف الثاني عشر</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0b1120;
+            color: #f1f5f9;
+        }
+        .font-code {
+            font-family: 'Fira Code', monospace;
+        }
+        /* LTR Code styling with big prominent font */
+        .code-block {
+            direction: ltr !important;
+            text-align: left !important;
+            font-family: 'Fira Code', monospace;
+            background: linear-gradient(145deg, #070d18, #0f172a);
+            color: #f8fafc;
+            border: 2px solid #334155;
+            font-size: 1.35rem;
+            line-height: 2.6rem;
+            letter-spacing: 0.5px;
+        }
+        .code-input {
+            direction: ltr !important;
+            text-align: left !important;
+            font-family: 'Fira Code', monospace;
+            background-color: #1e293b;
+            color: #38bdf8;
+            border: 2px solid #64748b;
+            padding: 0.6rem 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+        .code-input::placeholder {
+            color: #64748b;
+            font-size: 1.05rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+        .code-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            background-color: #030712;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.4);
+            transform: scale(1.01);
+        }
+        .correct-answer {
+            border-color: #10b981 !important;
+            background-color: #064e3b !important;
+            color: #6ee7b7 !important;
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.5) !important;
+        }
+        .wrong-answer {
+            border-color: #ef4444 !important;
+            background-color: #450a0a !important;
+            color: #fca5a5 !important;
+            box-shadow: 0 0 14px rgba(239, 68, 68, 0.4) !important;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+            border-color: #60a5fa;
+            transform: translateY(-2px);
+        }
+        /* Syntax Colors matching VB2008 */
+        .syn-kw { color: #60a5fa; font-weight: 800; }     /* Keywords (Dim, Public, Module, End) */
+        .syn-const { color: #facc15; font-weight: 900; }  /* Const keyword */
+        .syn-var { color: #38bdf8; font-weight: 700; }    /* Variables */
+        .syn-type { color: #34d399; font-weight: 800; }   /* Types */
+        .syn-str { color: #fde047; }                      /* Strings */
+        .syn-method { color: #f472b6; font-weight: 700; } /* Methods */
+        .syn-comm { color: #94a3b8; font-style: italic; font-family: 'Cairo', sans-serif; font-size: 1.05rem; }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .float-anim {
+            animation: float-slow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-900 text-slate-100">
+
+    <header class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white shadow-2xl sticky top-0 z-50 border-b border-indigo-900/60">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                
+                <!-- Lesson Information -->
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 flex items-center justify-center font-black text-3xl shadow-xl text-yellow-300 border-2 border-indigo-400 float-anim">
+                        12ع
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="bg-blue-900/80 text-blue-200 text-xs md:text-sm px-3.5 py-1 rounded-full font-bold border border-blue-700">الأسبوع السادس • الباب الثالث</span>
+                            <span class="text-yellow-400 text-xs md:text-sm font-bold bg-yellow-400/10 px-3 py-0.5 rounded-full border border-yellow-400/30">مراحل بناء البرنامج</span>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-black text-white mt-1 tracking-wide">تابع: المتغيرات + الثوابت</h1>
+                        <div class="mt-1 flex items-center gap-2">
+                            <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs md:text-sm font-black px-3 py-0.5 rounded-lg shadow-sm">
+                                👩‍🏫 إعداد وتصميم: أ. وفاء عليان
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class, Date & Attendance Tracker -->
+                <div class="flex flex-wrap items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-slate-700 shadow-inner text-base">
+                    
+                    <!-- Class Selector (12ع3 / 12ع2) -->
+                    <div class="flex items-center gap-2 bg-slate-800/90 px-3.5 py-1.5 rounded-xl border border-slate-600">
+                        <span class="text-yellow-400 font-bold">🏫 الفصل:</span>
+                        <select id="classSelect" onchange="handleClassChange()" class="bg-slate-900 text-yellow-300 font-black rounded-lg px-2.5 py-1 border border-slate-600 focus:outline-none cursor-pointer text-lg">
+                            <option value="12ع3" selected>12ع3 (الاثنين)</option>
+                            <option value="12ع2">12ع2 (الأربعاء)</option>
+                        </select>
+                    </div>
+
+                    <!-- Day & Date linked to class -->
+                    <div class="flex items-center gap-2 bg-slate-800/90 px-3.5 py-1.5 rounded-xl border border-slate-600">
+                        <span class="text-yellow-400 font-bold">📅</span>
+                        <input type="text" id="lessonDay" value="الاثنين" class="bg-transparent border-none text-white font-bold w-16 text-center focus:outline-none" title="اليوم">
+                        <span class="text-slate-500">|</span>
+                        <input type="text" id="lessonDate" value="19-10-2026" class="bg-transparent border-none text-blue-300 font-bold w-28 text-center focus:outline-none" title="التاريخ">
+                    </div>
+
+                    <!-- Attendance & Absentees Counters -->
+                    <div class="flex items-center gap-3 bg-slate-800/90 px-3.5 py-1.5 rounded-xl border border-slate-600">
+                        <div class="flex items-center gap-1.5" title="عدد الطالبات الكلي">
+                            <span class="text-slate-400 font-bold text-xs">الكل:</span>
+                            <input type="number" id="totalStudents" value="28" min="1" max="50" onchange="calculateAttendance()" class="w-14 bg-slate-900 text-center font-bold text-white rounded border border-slate-700 focus:outline-none py-0.5 text-base">
+                        </div>
+                        <div class="flex items-center gap-1.5" title="الحضور">
+                            <span class="text-emerald-400 font-bold text-xs">حضور:</span>
+                            <input type="number" id="presentStudents" value="28" min="0" max="50" onchange="calculateAttendance()" class="w-14 bg-slate-900 text-center font-bold text-emerald-300 rounded border border-slate-700 focus:outline-none py-0.5 text-base">
+                        </div>
+                        <div class="flex items-center gap-1.5" title="الغياب">
+                            <span class="text-rose-400 font-bold text-xs">غياب:</span>
+                            <span id="absentStudents" class="font-black text-rose-400 px-2 text-lg">0</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <div class="mt-4 flex flex-wrap gap-3 border-t border-slate-800/80 pt-3 justify-center md:justify-start">
+                <button onclick="switchTab('tab-warmup')" id="btn-warmup" class="tab-btn active px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                    <span>🎯</span> المقدمة والنشاط الاستهلالي
+                </button>
+                <button onclick="switchTab('tab-worksheet')" id="btn-worksheet" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                    <span>📝</span> ورقة عمل (8) التفاعلية
+                </button>
+                <button onclick="switchTab('tab-constants')" id="btn-constants" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                    <span>📘</span> درس الثوابت (Constants)
+                </button>
+                <button onclick="switchTab('tab-summary')" id="btn-summary" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                    <span>🎓</span> الأسئلة الختامية (الأحداث ومعلومات الدرس)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+
+        <section id="tab-warmup" class="tab-content space-y-8 block">
+            
+            <!-- Pedagogical Value Card: Interactive Scientist Showcase -->
+            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 md:p-8 shadow-2xl border-2 border-yellow-500/40 relative overflow-hidden">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    
+                    <!-- Text and Trigger Column -->
+                    <div class="space-y-4 max-w-2xl">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="bg-yellow-400 text-slate-950 font-black px-4 py-1.5 rounded-full text-sm inline-block shadow">🌟 القيمة التربوية: تقدير العلم والعلماء</span>
+                            <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 px-3.5 py-1 rounded-full text-xs font-bold">نشاط استكشافي</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">
+                            «ماذا تعرفين عن هذا العالم من خلال عرض صورته؟»
+                        </h2>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            تأملي صورة العالم المسلم أدناه بالتعاون مع مجموعتك، ثم انقري على الزر لاكتشاف هويته وأهم إنجازاته التي أسست لعلم البرمجة والحاسوب.
+                        </p>
+                        
+                        <!-- Interactive Button to Reveal Scientist Info -->
+                        <div>
+                            <button onclick="toggleScientistDetails()" id="btnScientistReveal" class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black px-8 py-3.5 rounded-2xl text-lg shadow-xl transition transform active:scale-95 flex items-center gap-3">
+                                <span>🔍</span> اضغطي هنا لمعرفة من هو العالم وما هي إنجازاته
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Guaranteed Robust Scientist Picture Box -->
+                    <div class="flex flex-col items-center">
+                        <div class="relative p-2 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-3xl shadow-2xl">
+                            <img id="scientistImg"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Al-Khwarizmi_portrait.jpg/340px-Al-Khwarizmi_portrait.jpg" 
+                                 alt="صورة العالم الخوارزمي" 
+                                 class="w-52 h-64 md:w-56 md:h-68 object-cover rounded-2xl shadow-inner border-4 border-slate-900 bg-slate-800"
+                                 onerror="handleImageFallback(this)">
+                            <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-slate-950 text-yellow-400 text-xs font-black px-4 py-1 rounded-full border border-yellow-500 shadow-md whitespace-nowrap">
+                                عالم الرياضيات والفلك
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Revealable Scientist Details Drawer -->
+                <div id="scientistDetailsBox" class="mt-6 pt-6 border-t border-slate-700/80 hidden transition-all duration-300">
+                    <div class="bg-slate-950/90 rounded-2xl p-6 md:p-8 border-2 border-yellow-500/50 shadow-inner space-y-5">
+                        
+                        <div class="border-b border-slate-800 pb-3 flex items-center gap-3 text-yellow-400 text-2xl font-black">
+                            <span>📜</span>
+                            <span>هو العالم: أبو عبد الله محمد بن موسى الخوارزمي (781م - 850م)</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-slate-200">
+                            <div class="bg-slate-900 p-5 rounded-2xl border border-amber-500/30 space-y-2">
+                                <div class="flex items-center gap-2 text-amber-400 font-black text-xl">
+                                    <span>🔹</span>
+                                    <h4>مؤسس علم الخوارزميات (Algorithm)</h4>
+                                </div>
+                                <p class="text-slate-300 text-base leading-relaxed">
+                                    اشتُق مصطلح "الخوارزمية" من اسمه، وهي الخطوات المنطقية المتسلسلة التي تبنى عليها لغات البرمجة وبرامج الحاسوب الحالية.
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-900 p-5 rounded-2xl border border-amber-500/30 space-y-2">
+                                <div class="flex items-center gap-2 text-amber-400 font-black text-xl">
+                                    <span>🔹</span>
+                                    <h4>مؤسس علم الجبر (Algebra)</h4>
+                                </div>
+                                <p class="text-slate-300 text-base leading-relaxed">
+                                    ألّف كتاب «المختصر في حساب الجبر والمقابلة»، وفصل فيه علم الجبر عن الحساب، وأخذت لغات العالم كلمة Algebra عنه.
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-900 p-5 rounded-2xl border border-amber-500/30 space-y-2">
+                                <div class="flex items-center gap-2 text-amber-400 font-black text-xl">
+                                    <span>🔹</span>
+                                    <h4>إدخال الصفر والنظام العشري</h4>
+                                </div>
+                                <p class="text-slate-300 text-base leading-relaxed">
+                                    أدخل الصفر واستخدمه كقيمة منزليّة، مما سهّل إجراء العمليات الحسابية والمعادلات الرياضية المعقدة.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Group Activity Timer (3 Minutes) -->
+            <div class="bg-slate-800 rounded-3xl p-6 border-2 border-slate-700 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-4xl">⏱️</span>
+                    <div>
+                        <h3 class="font-black text-xl md:text-2xl text-white">مؤقت نشاط المجموعات (3 دقائق)</h3>
+                        <p class="text-slate-400 text-base">لتدوين إجابات أسئلة التمهيد بالتعاون مع مجموعتك</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="timerDisplay" class="font-code font-black text-4xl md:text-5xl text-yellow-400 bg-slate-950 px-8 py-2.5 rounded-2xl border-2 border-yellow-500/40 shadow-inner">
+                        03:00
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="timerToggleBtn" onclick="toggleTimer()" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black px-7 py-3 rounded-2xl text-lg shadow-lg transition">
+                            ▶ ابدأ المؤقت
+                        </button>
+                        <button onclick="resetTimer()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-5 py-3 rounded-2xl text-lg transition">
+                            🔄 إعادة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                
+                <!-- Warmup Question 1: Fill in the code blanks -->
+                <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-3 gap-2">
+                        <h4 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-2">
+                            <span>✨</span> بالتعاون مع مجموعتك أجيبي عن الأسئلة التالية: اكتبي التعليمة البرمجية للإعلان عن المتغير (sgrade) ونوعه (Integer) على مستوى المشروع
+                        </h4>
+                        <span class="text-sm bg-blue-900/80 text-blue-200 font-bold px-4 py-1 rounded-full border border-blue-600 font-code self-start sm:self-auto">Module1.vb</span>
+                    </div>
+
+                    <p class="text-slate-300 text-lg md:text-xl">
+                        أكملي كتابة التعليمة البرمجية للإعلان عن المتغير العام داخل الوحدة النمطية <code class="font-code font-bold text-blue-300">Module</code>:
+                    </p>
+
+                    <div class="code-block rounded-2xl p-6 shadow-2xl">
+                        <span class="syn-kw">Module</span> <span class="text-slate-100 font-bold">Module1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm">' الإعلان العام على مستوى المشروع:</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> 
+                        <input id="warmup_q1_var" type="text" placeholder="اسم المتغير..." class="code-input w-48 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /> 
+                        <span class="syn-kw">As</span> 
+                        <input id="warmup_q1_type" type="text" placeholder="نوع البيانات..." class="code-input w-48 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /><br>
+                        <span class="syn-kw">End Module</span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <button onclick="checkWarmupQ1Interactive()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
+                            ✓ تحقق من الإجابة
+                        </button>
+                        <div id="feedback-wq1" class="text-lg font-bold hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Warmup Question 2: Interactive Input -->
+                <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-3 gap-2">
+                        <h4 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-2">
+                            <span>✨</span> بالتعاون مع مجموعتك أجيبي عن الأسئلة التالية: اكتبي التعليمة البرمجية للإعلان عن المتغير (sname) ونوعه (String) على مستوى النموذج
+                        </h4>
+                        <span class="text-sm bg-purple-900/80 text-purple-200 font-bold px-4 py-1 rounded-full border border-purple-600 font-code self-start sm:self-auto">Form1.vb</span>
+                    </div>
+
+                    <p class="text-slate-300 text-lg md:text-xl">
+                        اكتبي التعليمة البرمجية للإعلان عن المتغير على مستوى النموذج:
+                    </p>
+
+                    <div class="code-block rounded-2xl p-6 shadow-2xl">
+                        <span class="syn-kw">Public Class</span> <span class="text-slate-100 font-bold">Form1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm">' الإعلان على مستوى النموذج:</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input id="warmup_q2" type="text" placeholder="اكتبي تعليمة الإعلان هنا..." class="code-input w-full max-w-xl rounded-xl mx-1" autocomplete="off" spellcheck="false" /><br>
+                        <span class="syn-kw">End Class</span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <button onclick="checkWarmupQ2Interactive()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
+                            ✓ تحقق من الإجابة
+                        </button>
+                        <div id="feedback-wq2" class="text-lg font-bold hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Warmup Question 3: Interactive Methods Fill-in -->
+                <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-3 gap-2">
+                        <h4 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-2">
+                            <span>✨</span> بالتعاون مع مجموعتك أجيبي عن الأسئلة التالية: اكتبي التعليمة البرمجية لإخفاء النموذج الحالي وإظهار النموذج الثاني Form2
+                        </h4>
+                        <span class="text-sm bg-emerald-900/80 text-emerald-200 font-bold px-4 py-1 rounded-full border border-emerald-600 font-code self-start sm:self-auto">إخفاء وإظهار</span>
+                    </div>
+
+                    <p class="text-slate-300 text-lg md:text-xl">
+                        أكملي التعليمات البرمجية لتنفيذ عمليتي إخفاء النموذج الحالي وإظهار النموذج الثاني:
+                    </p>
+
+                    <div class="code-block rounded-2xl p-6 shadow-2xl space-y-3">
+                        <div>
+                            <span class="syn-comm block mb-1">' 1. إخفاء النموذج الحالي:</span>
+                            <span class="syn-var">Me</span>.<input id="warmup_q3_1" type="text" placeholder="اكتبي التعليمة..." class="code-input w-64 rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                        </div>
+                        <div>
+                            <span class="syn-comm block mb-1">' 2. إظهار النموذج الثاني:</span>
+                            <span class="syn-var">Form2</span>.<input id="warmup_q3_2" type="text" placeholder="اكتبي التعليمة..." class="code-input w-64 rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <button onclick="checkWarmupQ3Interactive()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
+                            ✓ تحقق من الإجابة
+                        </button>
+                        <div id="feedback-wq3" class="text-lg font-bold hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Bonus Interactive Matching Exercise: Warmup Booster -->
+                <div class="bg-gradient-to-br from-indigo-950/70 to-slate-900 rounded-3xl p-6 md:p-8 border-2 border-indigo-600/50 shadow-xl space-y-5">
+                    <div class="flex items-center justify-between border-b border-indigo-700/50 pb-3">
+                        <h4 class="text-xl md:text-2xl font-black text-indigo-300 flex items-center gap-2">
+                            <span>⚡</span> نشاط تنشيطي سريع: اختاري الوظيفة الصحيحة لكل تعليمة
+                        </h4>
+                        <span class="text-xs bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full font-bold">تثبيت المفاهيم</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 space-y-3">
+                            <span class="font-code text-xl font-black text-pink-400 block" dir="ltr">MsgBox("...")</span>
+                            <select id="quick_match_1" class="w-full bg-slate-800 text-white rounded-xl p-2.5 border border-slate-600 font-bold focus:outline-none">
+                                <option value="">-- اختاري وظيفتها --</option>
+                                <option value="msg">إظهار رسالة للمستخدم</option>
+                                <option value="hide">إخفاء النموذج</option>
+                                <option value="dim">الإعلان عن متغير</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 space-y-3">
+                            <span class="font-code text-xl font-black text-blue-400 block" dir="ltr">Public sgrade As Integer</span>
+                            <select id="quick_match_2" class="w-full bg-slate-800 text-white rounded-xl p-2.5 border border-slate-600 font-bold focus:outline-none">
+                                <option value="">-- اختاري وظيفتها --</option>
+                                <option value="proj">متغير عام على مستوى المشروع</option>
+                                <option value="form">متغير على مستوى النموذج فقط</option>
+                                <option value="const">إعلان عن ثابت</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 space-y-3">
+                            <span class="font-code text-xl font-black text-emerald-400 block" dir="ltr">sgrade = sgrade + 1</span>
+                            <select id="quick_match_3" class="w-full bg-slate-800 text-white rounded-xl p-2.5 border border-slate-600 font-bold focus:outline-none">
+                                <option value="">-- اختاري وظيفتها --</option>
+                                <option value="accum">جمع تراكمي لدرجة الطالبة</option>
+                                <option value="exit">إنهاء تشغيل البرنامج</option>
+                                <option value="show">إظهار نافذة جديدة</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="checkQuickMatches()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-6 py-2.5 rounded-xl text-base transition shadow">
+                            فحص المطابقة
+                        </button>
+                        <div id="feedback-quickmatch" class="text-base font-bold hidden"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('tab-worksheet')" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-black px-10 py-4 rounded-2xl text-xl shadow-2xl hover:shadow-indigo-500/50 transition transform hover:scale-105 active:scale-95 flex items-center gap-3 mx-auto">
+                    <span>🚀</span> الانتقال إلى حل ورقة عمل (8) الآن ←
+                </button>
+            </div>
+
+        </section>
+
+        <section id="tab-worksheet" class="tab-content space-y-8 hidden">
+            
+            <!-- Worksheet Overview Card -->
+            <div class="bg-gradient-to-r from-blue-800 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-2xl border-2 border-blue-600/70">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-3">
+                        <span class="bg-yellow-400 text-slate-950 font-black px-4 py-1.5 rounded-full text-sm inline-block shadow">تطبيق المنهج المعتمد</span>
+                        <h2 class="text-2xl md:text-3xl font-black">ورقة عمل (8) - مشروع بنك المعلومات</h2>
+                        <p class="text-blue-200 text-lg leading-relaxed">
+                            أكملي التعليمات البرمجية الناقصة في الخانات التالية من اليسار إلى اليمين (LTR)، ثم تحققي من صحة الكود.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950/90 px-6 py-4 rounded-2xl border border-slate-700 text-center min-w-[200px] shadow-lg">
+                        <div class="text-sm text-slate-400 font-bold mb-1">التقدم المنجز</div>
+                        <div id="scoreText" class="text-4xl font-black text-yellow-400 font-code">0 / 7</div>
+                        <button onclick="revealAllSolutions()" class="mt-2 text-xs text-blue-300 hover:text-white underline font-bold">
+                            عرض الإجابات النموذجية للمعلمة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Windows Forms Simulator Box -->
+            <div class="bg-slate-800 rounded-3xl p-6 border-2 border-slate-700 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-3xl">🖥️</span>
+                        <h3 class="font-black text-xl md:text-2xl text-white">محاكي تشغيل مشروع بنك المعلومات (Visual Basic 2008)</h3>
+                    </div>
+                    <button onclick="resetSim()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-4 py-2 rounded-xl text-base transition">
+                        🔄 إعادة تشغيل
+                    </button>
+                </div>
+                
+                <div class="max-w-xl mx-auto bg-slate-100 rounded-2xl border-4 border-blue-900 shadow-2xl overflow-hidden font-sans text-slate-800">
+                    <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white px-4 py-2.5 flex items-center justify-between select-none">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3.5 h-3.5 rounded-full bg-yellow-400 inline-block shadow"></span>
+                            <span id="simTitle" class="font-black text-base">بنك المعلومات - Form1</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono font-bold">
+                            <span class="px-2 py-0.5 hover:bg-blue-800 rounded">_</span>
+                            <span class="px-2 py-0.5 hover:bg-blue-800 rounded">□</span>
+                            <span class="px-2 py-0.5 hover:bg-rose-600 rounded">✕</span>
+                        </div>
+                    </div>
+
+                    <div id="simBody" class="p-8 text-center min-h-[230px] flex flex-col items-center justify-center space-y-5 bg-gradient-to-b from-slate-50 to-slate-200">
+                        <!-- Loaded dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q3">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">3-</span> إضافة وحدة نمطية «Module» والإعلان عن المتغيرات العامة
+                    </h3>
+                    <span class="text-sm bg-blue-900/80 text-blue-200 font-bold px-3.5 py-1 rounded-full font-code border border-blue-600">Module1.vb</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    أضف وحدة نمطية «Module» للمشروع وأعلن عن متغيرين أحدهما <code class="font-code text-cyan-400 font-bold">sname</code> من نوع <code class="font-code text-emerald-400 font-bold">String</code> والثاني <code class="font-code text-cyan-400 font-bold">sgrade</code> من نوع <code class="font-code text-emerald-400 font-bold">Integer</code>:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Module</span> <span class="text-slate-100 font-bold">Module1</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_1" type="text" placeholder="اكتبي التعليمة الأولى..." class="code-input w-96 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_2" type="text" placeholder="اكتبي التعليمة الثانية..." class="code-input w-96 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Module</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ3()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 3
+                    </button>
+                    <div id="feedback-q3" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q4">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">4-</span> زر «دخول» بالنموذج الأول Form1 (تخصيص الاسم والانتقال)
+                    </h3>
+                    <span class="text-sm bg-purple-900/80 text-purple-200 font-bold px-3.5 py-1 rounded-full font-code border border-purple-600">Form1.vb</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    انتقل إلى النموذج الأول «Form1» واكتب التعليمات البرمجية للزر «دخول» لتخصيص اسم المتعلم للمتغير «sname» وإخفاء النموذج الأول وإظهار النموذج الثاني:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' تخصيص القيمة المدخلة في مربع النص للمتغير sname:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_1" type="text" placeholder="اكتبي تعليمة التخصيص..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج الأول وإظهار النموذج الثاني:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Sub</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ4()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 4
+                    </button>
+                    <div id="feedback-q4" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q5">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">5-</span> النموذج الثاني Form2: زر الإجابة الصحيحة (String)
+                    </h3>
+                    <span class="text-sm bg-emerald-900/80 text-emerald-200 font-bold px-3.5 py-1 rounded-full font-code border border-emerald-600">Button2_Click</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    انتقل إلى النموذج الثاني «Form2» واكتب التعليمات البرمجية للزر الثاني «String» بحيث يضاف واحد للمتغير sgrade ويتم إخفاء النموذج الحالي وإظهار النموذج الثالث:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Private Sub</span> Button2_Click(...) <span class="syn-kw">Handles</span> Button2.Click<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' الجمع التراكمي لدرجة الطالبة (إضافة 1):</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_1" type="text" placeholder="اكتبي تعليمة الجمع التراكمي..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج الحالي وإظهار النموذج الثالث:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Sub</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ5()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 5
+                    </button>
+                    <div id="feedback-q5" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q6">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">6-</span> أزرار الإجابات الخاطئة (رسالة تحذيرية دون زيادة درجات)
+                    </h3>
+                    <span class="text-sm bg-rose-900/80 text-rose-200 font-bold px-3.5 py-1 rounded-full font-code border border-rose-600">MsgBox</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    اكتب التعليمات البرمجية للزرين الأول والثالث لإخفاء النموذج الحالي وإظهار النموذج الثالث مع إظهار رسالة تفيد بأن الإجابة غير صحيحة:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إظهار رسالة بأن الإجابة غير صحيحة:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_1" type="text" placeholder="اكتبي تعليمة إظهار الرسالة..." class="code-input w-full max-w-2xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج وإظهار النموذج الثالث:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Sub</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ6()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 6
+                    </button>
+                    <div id="feedback-q6" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q7">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">7-</span> النموذج الثالث Form3 (برمجة أزرار السؤال الثاني)
+                    </h3>
+                    <span class="text-sm bg-purple-900/80 text-purple-200 font-bold px-3.5 py-1 rounded-full font-code border border-purple-600">Form3.vb</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    انتقل للنموذج الثالث «Form3» واكتب التعليمات البرمجية للأزرار الثلاثة، كما في النموذج الثاني مع مراعاة الإجابة الصحيحة (زر Dim):
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-comm block mb-2">' زر الإجابة الصحيحة Button1 (Dim):</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_1" type="text" placeholder="اكتبي تعليمة زيادة الدرجة..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_2" type="text" placeholder="اكتبي تعليمة إظهار النموذج التالي..." class="code-input w-80 rounded-xl mx-2 my-2" autocomplete="off" spellcheck="false" /><br><br>
+                    <span class="syn-comm block mb-2">' أزرار الإجابات الخاطئة Button2 و Button3:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_3" type="text" placeholder="اكتبي تعليمة رسالة الخطأ..." class="code-input w-full max-w-2xl rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ7()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 7
+                    </button>
+                    <div id="feedback-q7" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q8">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">8-</span> النموذج الرابع Form4: إظهار النتيجة عند فتح النموذج
+                    </h3>
+                    <span class="text-sm bg-amber-900/80 text-amber-200 font-bold px-3.5 py-1 rounded-full font-code border border-amber-600">Form4_Load</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    انتقل للنموذج الرابع «Form4» واكتب التعليمات البرمجية على النموذج لتظهر النتيجة عند فتح النموذج (دمج اسم الطالبة sname مع درجتها sgrade):
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Private Sub</span> Form4_Load(...) <span class="syn-kw">Handles MyBase.Load</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' دمج الاسم والدرجة في عنوان Label1 بمعامل الربط (&):</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-var">Label1.Text =</span> <input id="q8_1" type="text" placeholder="اكتبي جملة الدمج النصي هنا..." class="code-input w-full max-w-3xl rounded-xl mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Sub</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ8()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 8
+                    </button>
+                    <div id="feedback-q8" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4" id="card-q9">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400">
+                        <span class="text-blue-400 font-black">9-</span> زر «خروج» بالنموذج الرابع (إنهاء البرنامج)
+                    </h3>
+                    <span class="text-sm bg-rose-900/80 text-rose-200 font-bold px-3.5 py-1 rounded-full font-code border border-rose-600">إنهاء البرنامج</span>
+                </div>
+                <p class="text-slate-200 text-lg leading-relaxed font-semibold">
+                    انتقل للنموذج الرابع «Form4» واكتب التعليمات البرمجية على الزر «خروج» لإنهاء البرنامج:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إنهاء تشغيل البرنامج:</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q9_1" type="text" placeholder="اكتبي تعليمة الإنهاء..." class="code-input w-56 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /><br>
+                    <span class="syn-kw">End Sub</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button onclick="checkQ9()" class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من السؤال 9
+                    </button>
+                    <div id="feedback-q9" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="tab-constants" class="tab-content space-y-8 hidden">
+            
+            <!-- Textbook Banner -->
+            <div class="bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-700 text-white rounded-3xl p-6 md:p-8 shadow-2xl border-2 border-amber-400/50">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-slate-950 text-yellow-300 font-black px-4 py-1.5 rounded-full text-sm inline-block shadow">كتاب تقنية المعلومات • صفحة 83</span>
+                            <span class="bg-white/20 text-white font-bold px-3 py-1 rounded-full text-sm">الباب الثالث: الفصل الأول</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">ثانياً: الثوابت (Constants) في Visual Basic</h2>
+                        <p class="text-amber-100 text-lg">
+                            شرح مفهوم الثابت، صيغة الإعلان والتخصيص باستخدام الكلمة المفتاحية، وتطبيق أنشطة الدرس التفاعلية.
+                        </p>
+                    </div>
+                    <div class="text-6xl select-none float-anim">📐</div>
+                </div>
+            </div>
+
+            <!-- Definition Card (Book p.83) -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-4">
+                <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                    <span class="text-3xl">📌</span> (1) تعريف الثابت (Constant):
+                </h3>
+                <div class="bg-amber-950/40 border-r-4 border-amber-400 p-6 rounded-2xl text-amber-200 text-xl font-bold leading-relaxed shadow-inner">
+                    «هو مكان داخل الذاكرة تُخزن فيه بيانات لا تتغير طيلة فترة تنفيذ البرنامج.»
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg mt-2">
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700">
+                        <span class="font-black text-cyan-400 block mb-1">المتغير (Variable):</span>
+                        تتغير قيمته أثناء تشغيل البرنامج (مثل درجات طالب sgrade، رصيد).
+                    </div>
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700">
+                        <span class="font-black text-yellow-400 block mb-1">الثابت (Constant):</span>
+                        تظل قيمته ثابتة ومحددة ولا يمكن تعديلها برمجياً (مثل Pi، اسم مصمم النظام).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Highlighted Keyword: CONST -->
+            <div class="bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 rounded-3xl p-8 md:p-12 border-4 border-amber-400/80 shadow-2xl text-center space-y-6 relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-56 h-56 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-56 h-56 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <span class="inline-block bg-amber-400 text-slate-950 font-black px-8 py-2.5 rounded-full text-lg md:text-xl shadow-xl">
+                    ⭐ الكلمة المفتاحية الأساسية للإعلان عن الثوابت
+                </span>
+
+                <div class="py-4">
+                    <span class="font-code font-black text-7xl sm:text-8xl md:text-9xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 drop-shadow-[0_10px_35px_rgba(245,158,11,0.7)] inline-block select-all animate-pulse">
+                        Const
+                    </span>
+                    <p class="text-amber-200 text-xl md:text-2xl font-bold mt-4">
+                        نستبدل كلمة <span class="text-blue-400 font-code font-black">Public</span> أو <span class="text-blue-400 font-code font-black">Dim</span> بكلمة <span class="text-yellow-400 font-code font-black text-3xl">Const</span> عند الإعلان عن أي قيمة ثابتة!
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/90 max-w-2xl mx-auto p-5 rounded-2xl border border-amber-400/30 text-slate-200 text-lg font-semibold leading-relaxed">
+                    💡 <span class="text-yellow-400 font-bold">ملاحظة كتاب الوزارة:</span> بما أن قيمة الثابت لا تتغير أثناء التشغيل، يلزم تخصيص القيمة له فور الإعلان عنه في نفس السطر.
+                </div>
+            </div>
+
+            <!-- Syntax Card (Book p.83) -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-6">
+                <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                    <span class="text-3xl">⚙️</span> (2) الإعلان والتخصيص للثابت (قاعدة تعليمة Const):
+                </h3>
+                <p class="text-slate-300 text-lg">
+                    يتم الإعلان وتخصيص قيمة للثابت باستخدام تعليمة واحدة وفق القاعدة التالية:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl text-2xl md:text-3xl">
+                    <span class="syn-const bg-amber-400/20 px-3 py-1 rounded-xl border border-amber-400/40">Const</span> <span class="syn-var">Name</span> <span class="syn-kw">As</span> <span class="syn-type">Type</span> = <span class="syn-str">Value</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center font-bold">
+                    <div class="p-4 bg-amber-950/40 border-2 border-amber-400/50 rounded-2xl shadow-sm">
+                        <span class="block text-yellow-400 text-2xl font-black font-code">Const</span>
+                        <span class="text-slate-300 text-sm">الكلمة المفتاحية للإعلان</span>
+                    </div>
+                    <div class="p-4 bg-slate-900 border border-slate-700 rounded-2xl">
+                        <span class="block text-cyan-400 text-xl font-code">Name</span>
+                        <span class="text-slate-400 text-sm">اسم الثابت</span>
+                    </div>
+                    <div class="p-4 bg-slate-900 border border-slate-700 rounded-2xl">
+                        <span class="block text-emerald-400 text-xl font-code">Type</span>
+                        <span class="text-slate-400 text-sm">نوع البيانات (اختياري)</span>
+                    </div>
+                    <div class="p-4 bg-slate-900 border border-slate-700 rounded-2xl">
+                        <span class="block text-pink-400 text-xl font-code">Value</span>
+                        <span class="text-slate-400 text-sm">القيمة المخصصة للثابت</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-2">
+                    <h4 class="font-black text-xl text-white">أمثلة الكتاب المدرسي على تعليمة Const:</h4>
+                    
+                    <div class="bg-slate-950 rounded-2xl p-5 border border-slate-700 space-y-3">
+                        <div class="code-block text-lg md:text-xl p-4 rounded-xl">
+                            <span class="syn-const">Const</span> <span class="syn-var">LastName</span> <span class="syn-kw">As</span> <span class="syn-type">String</span> = <span class="syn-str">"محمد أحمد"</span>
+                        </div>
+                        <p class="text-slate-300 text-base md:text-lg">
+                            • اسم الثابت: <code class="font-code font-bold text-cyan-300">LastName</code>، نوعه: <code class="font-code font-bold text-emerald-300">String</code>، وقيمته: <code class="font-code text-yellow-300">"محمد أحمد"</code>.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-950 rounded-2xl p-5 border border-slate-700 space-y-3">
+                        <div class="code-block text-lg md:text-xl p-4 rounded-xl">
+                            <span class="syn-const">Const</span> <span class="syn-var">Pi</span> = <span class="syn-str">3.14</span>
+                        </div>
+                        <p class="text-slate-300 text-base md:text-lg">
+                            • اسم الثابت: <code class="font-code font-bold text-cyan-300">Pi</code> وقيمته: <code class="font-code text-yellow-300">3.14</code> (تم الإعلان دون تحديد نوع وسيقوم البرنامج بتحديد نوعه تلقائياً).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Activity: Arrange the Const statement -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-2xl space-y-6" id="activity-arrange-card">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-700 pb-4">
+                    <div>
+                        <span class="bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-black px-4 py-1.5 rounded-full text-sm shadow">نشاط تفاعلي تعاوني</span>
+                        <h3 class="text-xl md:text-2xl font-black text-yellow-400 mt-2 flex items-center gap-2">
+                            <span>🧩</span> نشاط: رتّبي تعليمة الإعلان عن الثابت x وقيمته 20
+                        </h3>
+                    </div>
+                    <span class="text-sm font-bold text-slate-300 bg-slate-700 px-4 py-1.5 rounded-full">اضغطي على البطاقات لترتيبها</span>
+                </div>
+
+                <p class="text-slate-200 text-lg font-semibold">
+                    بالتعاون مع مجموعتك، رتبي الكلمات المبعثرة التالية لتكوين تعليمة صحيحة للإعلان عن الثابت <code class="font-code font-bold text-yellow-400">x</code> وقيمته <code class="font-code font-bold text-yellow-400">20</code>:
+                </p>
+
+                <div class="bg-slate-950 p-6 rounded-2xl border-2 border-dashed border-amber-400/60 min-h-[100px] flex items-center justify-start gap-3 overflow-x-auto shadow-inner" dir="ltr" id="arrangedSlots">
+                    <span id="arrangePlaceholder" class="text-slate-400 font-sans text-lg mx-auto select-none" dir="rtl">
+                        👈 اضغطي على الكلمات بالترتيب لتظهر هنا بالصيغة السليمة (من اليسار لليمين)...
+                    </span>
+                </div>
+
+                <div class="space-y-3">
+                    <span class="text-sm font-bold text-slate-400 block">الكلمات المتاحة للاختيار (انقري على الكلمة):</span>
+                    <div class="flex flex-wrap items-center justify-center gap-4 py-2" id="availableWordsPool">
+                        <!-- Loaded scrambled dynamically via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-700">
+                    <div class="flex gap-3">
+                        <button onclick="checkArrangedStatement()" class="bg-amber-600 hover:bg-amber-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg flex items-center gap-2">
+                            <span>✓</span> فحص الترتيب
+                        </button>
+                        <button onclick="resetArrangedWords()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-6 py-3 rounded-2xl text-lg transition">
+                            🔄 إعادة المحاولة
+                        </button>
+                    </div>
+                    <div id="feedback-arrange" class="text-xl font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Activity: Manual Typing Practice for Const -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                        <span class="text-3xl">✍️</span> كتابة تعليمة الإعلان عن الثابت x وقيمته 20
+                    </h3>
+                    <span class="text-sm bg-amber-900/80 text-amber-200 font-bold px-4 py-1.5 rounded-full font-code border border-amber-600">كتابة برمجية LTR</span>
+                </div>
+
+                <p class="text-slate-200 text-lg">
+                    اكتبي التعليمة البرمجية للإعلان عن الثابت وتخصيص القيمة له:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <input id="activity7Input" type="text" placeholder="اكتبي تعليمة الإعلان عن الثابت هنا..." class="code-input w-full max-w-xl rounded-xl mx-1" autocomplete="off" spellcheck="false" />
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <button onclick="checkActivity7()" class="bg-amber-600 hover:bg-amber-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من التعليمة
+                    </button>
+                    <div id="feedback-activity7" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Worksheet 9 Application from Book p.117 & p.84 -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                        <span class="text-3xl">💻</span> تطبيق ورقة عمل (9) - كتاب ص 84 وص 117 (ثابت مصممة البرنامج):
+                    </h3>
+                    <span class="text-sm bg-purple-900/80 text-purple-200 font-bold px-4 py-1.5 rounded-full font-code border border-purple-600">S_design / c_name</span>
+                </div>
+
+                <p class="text-slate-200 text-lg">
+                    في مشروع «بنك المعلومات»، أعلني عن ثابت على مستوى النموذج <code class="font-code font-bold text-blue-300">Form1</code> باسم <code class="font-code font-bold text-pink-400">S_design</code> (أو <code class="font-code font-bold text-pink-400">c_name</code>) لتخزين اسمك:
+                </p>
+
+                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <span class="syn-kw">Public Class</span> <span class="text-slate-100 font-bold">Form1</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm">' الإعلان عن الثابت على مستوى النموذج Form1:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="constPracticeInput" type="text" placeholder="اكتبي تعليمة الثابت هنا... (مثال: Const S_design = &quot;اسمك&quot;)" class="code-input w-full max-w-2xl rounded-xl mx-2 my-1" autocomplete="off" spellcheck="false" /><br><br>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Private Sub</span> <span class="syn-var font-bold">Form1_Load</span>(...) <span class="syn-kw">Handles MyBase.Load</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm">' إظهار اسم المصممة في عنوان Label4 أو Label2 عند التشغيل:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-var">Label4.Text = S_design</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">End Sub</span><br>
+                    <span class="syn-kw">End Class</span>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <button onclick="checkConstPractice()" class="bg-amber-600 hover:bg-amber-700 text-white font-black px-8 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من كتابة تعليمة الثابت Const
+                    </button>
+                    <div id="feedback-constPractice" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="tab-summary" class="tab-content space-y-8 hidden">
+            
+            <!-- Summary Banner -->
+            <div class="bg-gradient-to-r from-emerald-800 via-teal-900 to-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-2xl border-2 border-emerald-500/70">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-yellow-400 text-slate-950 font-black px-4 py-1.5 rounded-full text-sm inline-block shadow">التقويم الختامي المباشر</span>
+                            <span class="bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 px-3.5 py-1 rounded-full text-xs font-bold font-code">الكتاب ص 58 و 80 و 83 و 145 و 153</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-black">الأسئلة الختامية: مفهوم الحدث ومعلومات الدرس</h2>
+                        <p class="text-emerald-100 text-lg leading-relaxed">
+                            أسئلة تقويمية تفاعلية شاملة لمفاهيم الأحداث (Events) بالبيسك المرئي، وخصائص المتغيرات والثوابت ونطاقاتها.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950/90 px-6 py-4 rounded-2xl border border-slate-700 text-center min-w-[200px] shadow-lg">
+                        <div class="text-sm text-slate-400 font-bold mb-1">نقاط التقويم الختامي</div>
+                        <div id="summaryScoreDisplay" class="text-4xl font-black text-emerald-400 font-code">0 / 6</div>
+                        <span class="text-xs text-slate-400 mt-1 block">أجيبي وتحققي من فهمك</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Events in Visual Basic 2008 (Book p.58 & p.145) -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                        <span class="text-3xl">⚡</span> أولاً: أسئلة حول «الحدث» (Event) في Visual Basic
+                    </h3>
+                    <span class="text-sm bg-blue-900/80 text-blue-200 font-bold px-3.5 py-1 rounded-full border border-blue-600 font-code">كتاب ص 58 و 145</span>
+                </div>
+
+                <!-- Event Question 1 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-emerald-400">1.</span> ما هو الحدث التلقائي (Default Event) عند النقر المزدوج على كائن الزر Button؟
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q1" value="Load" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Load</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q1" value="Click" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-emerald-400">Click</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q1" value="Change" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Change</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Event Question 2 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-emerald-400">2.</span> في ورقة عمل (8)، أردنا إظهار النتيجة فور فتح وتشغيل النموذج الرابع Form4، ما هو الحدث المناسب للنموذج؟
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q2" value="Click" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Form4_Click</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q2" value="Load" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-emerald-400">Form4_Load</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="event_q2" value="Close" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Form4_Close</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Event Question 3 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-emerald-400">3.</span> أكملي اسم الحدث الناقص في سطر تعريف الإجراء الفرعي الخاص بزر الخروج Button1:
+                    </h4>
+                    <div class="code-block rounded-xl p-4 text-base md:text-lg">
+                        <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.<input id="event_q3_input" type="text" placeholder="اسم الحدث..." class="code-input w-44 rounded-lg mx-2 text-center" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <button onclick="checkEventQuestions()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من أسئلة الأحداث
+                    </button>
+                    <div id="feedback-events" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Section 2: Core Concepts Questions (Book p.151-155) -->
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-8 border-2 border-slate-700 shadow-xl space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-3">
+                        <span class="text-3xl">📚</span> ثانياً: أسئلة حول معلومات الدرس (المتغيرات، الثوابت، والنطاقات)
+                    </h3>
+                    <span class="text-sm bg-purple-900/80 text-purple-200 font-bold px-3.5 py-1 rounded-full border border-purple-600 font-code">الكتاب ص 151-155</span>
+                </div>
+
+                <!-- True / False Question 1 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-yellow-400">4.</span> «قيمة الثابت Constant يمكن تغييرها أثناء تنفيذ البرنامج عن طريق تعليمة تخصيص جديدة»:
+                    </h4>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center gap-3 px-6 py-2.5 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-emerald-500 transition">
+                            <input type="radio" name="lesson_q4" value="true" class="accent-emerald-500 w-5 h-5">
+                            <span class="font-bold text-lg text-slate-200">صحيحة (أ)</span>
+                        </label>
+                        <label class="flex items-center gap-3 px-6 py-2.5 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-rose-500 transition">
+                            <input type="radio" name="lesson_q4" value="false" class="accent-rose-500 w-5 h-5">
+                            <span class="font-bold text-lg text-slate-200">غير صحيحة (ب)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Multi-choice Question 2 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-yellow-400">5.</span> للإعلان عن متغير متاح على مستوى كافة نماذج المشروع، نستخدم الكلمة المفتاحية:
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-blue-500 transition">
+                            <input type="radio" name="lesson_q5" value="Dim" class="accent-blue-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Dim</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-blue-500 transition">
+                            <input type="radio" name="lesson_q5" value="Public" class="accent-blue-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-cyan-400">Public</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-blue-500 transition">
+                            <input type="radio" name="lesson_q5" value="Const" class="accent-blue-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Const</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-slate-950 rounded-xl cursor-pointer border border-slate-700 hover:border-blue-500 transition">
+                            <input type="radio" name="lesson_q5" value="Me" class="accent-blue-500 w-5 h-5">
+                            <span class="font-code font-bold text-lg text-slate-200">Me</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Text-input Question 3 -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3">
+                    <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-yellow-400">6.</span> اكتبي المعامل البرمجي المستخدم للدمج والربط بين النصوص والمتغيرات في Visual Basic (مثل دمج sname و sgrade):
+                    </h4>
+                    <div class="flex items-center gap-4">
+                        <input id="lesson_q6_input" type="text" placeholder="اكتبي الرمز أو المعامل هنا..." class="code-input w-64 rounded-xl text-center text-xl" autocomplete="off" spellcheck="false">
+                        <span class="text-slate-400 text-sm font-semibold">تلميح: يُكتب على لوحة المفاتيح عبر Shift + 7</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <button onclick="checkLessonInfoQuestions()" class="bg-purple-600 hover:bg-purple-700 text-white font-black px-7 py-3 rounded-2xl text-lg transition shadow-lg">
+                        ✓ تحقق من أسئلة معلومات الدرس
+                    </button>
+                    <div id="feedback-lesson-info" class="text-lg font-bold hidden"></div>
+                </div>
+            </div>
+
+            <!-- Closing Summary Table: Fast Revision Card -->
+            <div class="bg-gradient-to-br from-slate-950 to-indigo-950 rounded-3xl p-6 md:p-8 border-2 border-indigo-600/50 shadow-2xl space-y-4">
+                <h3 class="text-xl md:text-2xl font-black text-yellow-400 flex items-center gap-2">
+                    <span>🌟</span> خلاصة الدرس السريعة للرجوع إليها:
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-slate-200 border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 border-b border-slate-700 text-yellow-300 font-black">
+                                <th class="p-3">المفهوم</th>
+                                <th class="p-3">الكلمة المفتاحية / الصيغة</th>
+                                <th class="p-3">الوظيفة ومكان الاستخدام</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-base">
+                            <tr class="hover:bg-slate-900/50">
+                                <td class="p-3 font-bold text-cyan-300">متغير عام بالمشروع</td>
+                                <td class="p-3 font-code font-bold text-yellow-300" dir="ltr">Public sgrade As Integer</td>
+                                <td class="p-3">يُعلن عنه داخل الوحدة النمطية <span class="font-code text-blue-400">Module</span> وتصل إليه جميع النماذج.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/50">
+                                <td class="p-3 font-bold text-emerald-300">متغير بنطاق النموذج</td>
+                                <td class="p-3 font-code font-bold text-yellow-300" dir="ltr">Dim sname As String</td>
+                                <td class="p-3">يُعلن عنه في أعلى النموذج قبل أي إجراء فرعي ويُستخدم بالنموذج فقط.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/50">
+                                <td class="p-3 font-bold text-amber-300">الثابت (Constant)</td>
+                                <td class="p-3 font-code font-bold text-amber-400" dir="ltr">Const x = 20</td>
+                                <td class="p-3">قيمة ثابتة لا تتغير طيلة فترة تشغيل البرنامج وتُخصص فور الإعلان.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/50">
+                                <td class="p-3 font-bold text-pink-300">الحدث التلقائي للزر</td>
+                                <td class="p-3 font-code font-bold text-pink-400" dir="ltr">Click</td>
+                                <td class="p-3">يتم تنفيذه عند ضغط المستخدم بالفأرة على الزر.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/50">
+                                <td class="p-3 font-bold text-indigo-300">الحدث التلقائي للنموذج</td>
+                                <td class="p-3 font-code font-bold text-indigo-400" dir="ltr">Load</td>
+                                <td class="p-3">يتم تنفيذه تلقائياً عند فتح وتحميل النموذج في الذاكرة.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-6 text-center text-base border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-300">مادة تقنية المعلومات - الصف الثاني عشر • Visual Basic 2008 Express</p>
+            <p class="text-slate-500 font-code font-semibold">الأسبوع السادس: تابع المتغيرات + الثوابت</p>
+            <p class="text-yellow-400 font-bold text-sm pt-2">✨ إعداد وتصميم: أ. وفاء عليان ✨</p>
+        </div>
+    </footer>
+
+    <script>
+        // Image error fallback system for the scientist picture
+        function handleImageFallback(imgElement) {
+            const fallbackUrls = [
+                "https://upload.wikimedia.org/wikipedia/commons/4/41/1983_CPA_5426_%281%29.png",
+                "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Khwarizmi_portrait.jpg",
+                "https://commons.wikimedia.org/wiki/Special:FilePath/Al_Khorezmy.jpg"
+            ];
+            
+            let currentAttempt = parseInt(imgElement.getAttribute('data-attempt') || '0');
+            if (currentAttempt < fallbackUrls.length) {
+                imgElement.setAttribute('data-attempt', (currentAttempt + 1).toString());
+                imgElement.src = fallbackUrls[currentAttempt];
+            } else {
+                imgElement.outerHTML = `
+                    <div class="w-52 h-64 md:w-56 md:h-68 rounded-2xl shadow-inner border-4 border-slate-900 bg-gradient-to-b from-slate-800 via-indigo-950 to-slate-900 flex flex-col items-center justify-center p-4 text-center">
+                        <span class="text-6xl mb-2">👳🏽‍♂️</span>
+                        <span class="text-yellow-400 font-black text-xl">الخوارزمي</span>
+                        <span class="text-xs text-slate-300 mt-1">مؤسس علم الجبر والخوارزميات</span>
+                    </div>
+                `;
+            }
+        }
+
+        function toggleScientistDetails() {
+            const box = document.getElementById('scientistDetailsBox');
+            const btn = document.getElementById('btnScientistReveal');
+            if (!box || !btn) return;
+
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                btn.innerHTML = '<span>🔼</span> إخفاء تفاصيل العالم';
+            } else {
+                box.classList.add('hidden');
+                btn.innerHTML = '<span>🔍</span> اضغطي هنا لمعرفة من هو العالم وما هي إنجازاته';
+            }
+        }
+
+        // Class & Attendance handling based on Schedule
+        function handleClassChange() {
+            const cls = document.getElementById('classSelect').value;
+            const dayEl = document.getElementById('lessonDay');
+            const dateEl = document.getElementById('lessonDate');
+            
+            if (cls === '12ع3') {
+                if (dayEl) dayEl.value = 'الاثنين';
+                if (dateEl) dateEl.value = '19-10-2026';
+                document.getElementById('totalStudents').value = 28;
+                document.getElementById('presentStudents').value = 28;
+            } else if (cls === '12ع2') {
+                if (dayEl) dayEl.value = 'الأربعاء';
+                if (dateEl) dateEl.value = '21-10-2026';
+                document.getElementById('totalStudents').value = 26;
+                document.getElementById('presentStudents').value = 26;
+            }
+            calculateAttendance();
+        }
+
+        function calculateAttendance() {
+            const total = parseInt(document.getElementById('totalStudents').value) || 0;
+            const present = parseInt(document.getElementById('presentStudents').value) || 0;
+            const absent = Math.max(0, total - present);
+            document.getElementById('absentStudents').innerText = absent;
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+                activeContent.classList.add('block');
+            }
+
+            if (tabId === 'tab-warmup') document.getElementById('btn-warmup').classList.add('active');
+            if (tabId === 'tab-worksheet') document.getElementById('btn-worksheet').classList.add('active');
+            if (tabId === 'tab-constants') document.getElementById('btn-constants').classList.add('active');
+            if (tabId === 'tab-summary') document.getElementById('btn-summary').classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Summary & Closure Tab State and Checks
+        const summaryScoreState = {
+            eq1: false, eq2: false, eq3: false,
+            lq4: false, lq5: false, lq6: false
+        };
+
+        function updateSummaryScore() {
+            const keys = Object.keys(summaryScoreState);
+            const done = keys.filter(k => summaryScoreState[k]).length;
+            const el = document.getElementById('summaryScoreDisplay');
+            if (el) el.innerText = `${done} / ${keys.length}`;
+        }
+
+        function checkEventQuestions() {
+            const r1 = document.querySelector('input[name="event_q1"]:checked');
+            const isQ1Ok = r1 && r1.value === 'Click';
+
+            const r2 = document.querySelector('input[name="event_q2"]:checked');
+            const isQ2Ok = r2 && r2.value === 'Load';
+
+            const q3Input = clean(document.getElementById('event_q3_input').value);
+            const isQ3Ok = q3Input === 'click';
+
+            const elInput = document.getElementById('event_q3_input');
+            if (elInput) {
+                elInput.className = `code-input w-44 rounded-lg mx-2 text-center ${isQ3Ok ? 'correct-answer' : 'wrong-answer'}`;
+            }
+
+            summaryScoreState.eq1 = isQ1Ok;
+            summaryScoreState.eq2 = isQ2Ok;
+            summaryScoreState.eq3 = isQ3Ok;
+            updateSummaryScore();
+
+            const allEventsOk = isQ1Ok && isQ2Ok && isQ3Ok;
+            if (allEventsOk) {
+                setFeedback('feedback-events', true, 'إجابات ممتازة! تم استيعاب مفهوم الحدث (Click للزر و Load للنموذج) بشكل رائع 100%.');
+            } else {
+                setFeedback('feedback-events', false, 'راجعي الإجابات: الحدث التلقائي للزر هو Click، وللنموذج عند التحميل هو Load.');
+            }
+        }
+
+        function checkLessonInfoQuestions() {
+            const r4 = document.querySelector('input[name="lesson_q4"]:checked');
+            const isQ4Ok = r4 && r4.value === 'false';
+
+            const r5 = document.querySelector('input[name="lesson_q5"]:checked');
+            const isQ5Ok = r5 && r5.value === 'Public';
+
+            const v6 = (document.getElementById('lesson_q6_input').value || '').trim();
+            const isQ6Ok = v6.includes('&') || clean(v6) === 'ampersand' || clean(v6) === 'and';
+
+            const el6 = document.getElementById('lesson_q6_input');
+            if (el6) {
+                el6.className = `code-input w-64 rounded-xl text-center text-xl ${isQ6Ok ? 'correct-answer' : 'wrong-answer'}`;
+            }
+
+            summaryScoreState.lq4 = isQ4Ok;
+            summaryScoreState.lq5 = isQ5Ok;
+            summaryScoreState.lq6 = isQ6Ok;
+            updateSummaryScore();
+
+            const allLessonOk = isQ4Ok && isQ5Ok && isQ6Ok;
+            if (allLessonOk) {
+                setFeedback('feedback-lesson-info', true, 'أحسنتِ! تم الإجابة على جميع أسئلة معلومات الدرس بنجاح تام.');
+            } else {
+                setFeedback('feedback-lesson-info', false, 'تأكدي من: الثابت لا تتغير قيمته، والمتغير العام يُعلن عنه بـ Public، ومعامل الربط هو (&).');
+            }
+        }
+
+        // Timer Logic for Group Activity (3 mins)
+        let timerInterval = null;
+        let timeLeft = 180;
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            const display = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            const el = document.getElementById('timerDisplay');
+            if (el) el.innerText = display;
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timerToggleBtn');
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.innerText = '▶ استئناف المؤقت';
+                btn.className = 'bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black px-7 py-3 rounded-2xl text-lg shadow-lg transition';
+            } else {
+                if (timeLeft <= 0) timeLeft = 180;
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        btn.innerText = 'انتهى الوقت!';
+                        btn.className = 'bg-rose-600 text-white font-black px-7 py-3 rounded-2xl text-lg shadow-lg';
+                        showSimModal('انتهت الـ 3 دقائق المخصصة لنشاط المجموعات!');
+                    }
+                }, 1000);
+                btn.innerText = '⏸ إيقاف مؤقت';
+                btn.className = 'bg-amber-600 hover:bg-amber-700 text-white font-black px-7 py-3 rounded-2xl text-lg shadow-lg transition';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 180;
+            updateTimerDisplay();
+            const btn = document.getElementById('timerToggleBtn');
+            if (btn) {
+                btn.innerText = '▶ ابدأ المؤقت';
+                btn.className = 'bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black px-7 py-3 rounded-2xl text-lg shadow-lg transition';
+            }
+        }
+
+        // Utility: clean string for flexible code check
+        function clean(str) {
+            if (!str) return '';
+            return str
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/["'״”’]/g, '"')
+                .replace(/me\./g, '')
+                .replace(/\(\)/g, '')
+                .replace(/s_name/g, 'sname')
+                .replace(/s_grade/g, 'sgrade')
+                .replace(/s_design/g, 'sdesign')
+                .replace(/sdesigner/g, 'sdesign')
+                .replace(/c_name/g, 'sdesign');
+        }
+
+        function setFeedback(elemId, isCorrect, msg) {
+            const el = document.getElementById(elemId);
+            if (!el) return;
+            el.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
+            el.classList.add(isCorrect ? 'text-emerald-400' : 'text-rose-400');
+            el.innerHTML = (isCorrect ? '✓ ' : '✕ ') + msg;
+        }
+
+        function checkWarmupQ1Interactive() {
+            const vVar = clean(document.getElementById('warmup_q1_var').value);
+            const vType = clean(document.getElementById('warmup_q1_type').value);
+
+            const isVarOk = vVar === 'sgrade';
+            const isTypeOk = vType === 'integer';
+
+            const elVar = document.getElementById('warmup_q1_var');
+            const elType = document.getElementById('warmup_q1_type');
+
+            elVar.className = `code-input w-48 rounded-xl mx-2 text-center ${isVarOk ? 'correct-answer' : 'wrong-answer'}`;
+            elType.className = `code-input w-48 rounded-xl mx-2 text-center ${isTypeOk ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (isVarOk && isTypeOk) {
+                setFeedback('feedback-wq1', true, 'إجابة ممتازة وصحيحة!');
+            } else {
+                setFeedback('feedback-wq1', false, 'راجعي اسم المتغير ونوعه داخل Module');
+            }
+        }
+
+        function checkWarmupQ2Interactive() {
+            const v = clean(document.getElementById('warmup_q2').value);
+            const ok = (v.includes('dim') || v.includes('private')) && v.includes('snameasstring');
+            const el = document.getElementById('warmup_q2');
+            el.className = `code-input w-full max-w-xl rounded-xl mx-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
+            setFeedback('feedback-wq2', ok, ok ? 'إجابة نموذجية وصحيحة!' : 'تأكدي من استخدام الكلمة المفتاحية Dim مع اسم المتغير ونوعه');
+        }
+
+        function checkWarmupQ3Interactive() {
+            const v1 = clean(document.getElementById('warmup_q3_1').value);
+            const v2 = clean(document.getElementById('warmup_q3_2').value);
+
+            const ok1 = v1 === 'hide' || v1 === 'me.hide';
+            const ok2 = v2 === 'show' || v2 === 'form2.show';
+
+            document.getElementById('warmup_q3_1').className = `code-input w-64 rounded-xl mx-2 ${ok1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('warmup_q3_2').className = `code-input w-64 rounded-xl mx-2 ${ok2 ? 'correct-answer' : 'wrong-answer'}`;
+
+            const okAll = ok1 && ok2;
+            setFeedback('feedback-wq3', okAll, okAll ? 'ممتاز! الإجابة صحيحة' : 'راجعي طريقة الإخفاء Hide وطريقة الإظهار Show');
+        }
+
+        function checkQuickMatches() {
+            const a1 = document.getElementById('quick_match_1').value;
+            const a2 = document.getElementById('quick_match_2').value;
+            const a3 = document.getElementById('quick_match_3').value;
+
+            const isAllCorrect = (a1 === 'msg' && a2 === 'proj' && a3 === 'accum');
+            if (isAllCorrect) {
+                setFeedback('feedback-quickmatch', true, 'أحسنتِ! جميع المطابقات صحيحة ومتقنة 100%!');
+            } else {
+                setFeedback('feedback-quickmatch', false, 'راجعي الخيارات: تأكدي من وظيفة كل تعليمة');
+            }
+        }
+
+        let arrangedWords = [];
+        const wordsOriginalList = [
+            { text: '=', isConst: false },
+            { text: '20', isConst: false },
+            { text: 'Const', isConst: true },
+            { text: 'x', isConst: false }
+        ];
+
+        function renderScrambledWords() {
+            const pool = document.getElementById('availableWordsPool');
+            if (!pool) return;
+            pool.innerHTML = '';
+            
+            // Randomly shuffle the words so they are never in correct order by default
+            let shuffled = [...wordsOriginalList].sort(() => Math.random() - 0.5);
+            // Ensure first word isn't 'Const' in shuffle for true scrambling
+            if (shuffled[0].text === 'Const') {
+                shuffled.reverse();
+            }
+
+            shuffled.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = function() { pickArrangeWord(this, item.text); };
+                if (item.isConst) {
+                    btn.className = 'arrange-token px-9 py-3 rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-code font-black text-2xl shadow-xl transition transform active:scale-95 cursor-pointer border-2 border-yellow-300';
+                } else {
+                    btn.className = 'arrange-token px-7 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-code font-black text-2xl shadow-lg transition transform active:scale-95 cursor-pointer';
+                }
+                btn.innerText = item.text;
+                pool.appendChild(btn);
+            });
+        }
+
+        function pickArrangeWord(buttonEl, word) {
+            arrangedWords.push(word);
+            buttonEl.classList.add('opacity-30', 'pointer-events-none');
+
+            const placeholder = document.getElementById('arrangePlaceholder');
+            if (placeholder) placeholder.style.display = 'none';
+
+            const container = document.getElementById('arrangedSlots');
+            const wordChip = document.createElement('span');
+            wordChip.className = 'font-code font-black text-2xl px-5 py-2.5 bg-yellow-400 text-slate-950 rounded-xl shadow-lg border-2 border-yellow-300 animate-pulse';
+            wordChip.innerText = word;
+            wordChip.id = `arranged-${arrangedWords.length}`;
+            container.appendChild(wordChip);
+        }
+
+        function resetArrangedWords() {
+            arrangedWords = [];
+            const container = document.getElementById('arrangedSlots');
+            container.innerHTML = `
+                <span id="arrangePlaceholder" class="text-slate-400 font-sans text-lg mx-auto select-none" dir="rtl">
+                    👈 اضغطي على الكلمات بالترتيب لتظهر هنا بالصيغة السليمة (من اليسار لليمين)...
+                </span>
+            `;
+
+            renderScrambledWords();
+
+            const fb = document.getElementById('feedback-arrange');
+            if (fb) fb.classList.add('hidden');
+        }
+
+        function checkArrangedStatement() {
+            const statement = arrangedWords.join(' ').trim();
+            const cleanSt = statement.replace(/\s+/g, '').toLowerCase();
+            const isCorrect = (cleanSt === 'constx=20');
+
+            if (isCorrect) {
+                setFeedback('feedback-arrange', true, 'ترتيب ممتاز وصحيح 100%!');
+            } else {
+                setFeedback('feedback-arrange', false, 'الترتيب غير صحيح! رتبي: الكلمة المفتاحية ثم اسم الثابت ثم علامة = ثم القيمة');
+            }
+        }
+
+        function checkActivity7() {
+            const v = clean(document.getElementById('activity7Input').value);
+            const ok = v === 'constx=20' || v === 'constxasinteger=20';
+            const el = document.getElementById('activity7Input');
+            el.className = `code-input w-full max-w-xl rounded-xl mx-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
+            setFeedback('feedback-activity7', ok, ok ? 'إجابة صحيحة وممتازة!' : 'تأكدي من صيغة الإعلان عن الثابت');
+        }
+
+        function checkConstPractice() {
+            const v = clean(document.getElementById('constPracticeInput').value);
+            const ok = v.startsWith('const') && (v.includes('sdesign') || v.includes('cname')) && v.includes('=') && (v.includes('"') || v.includes("'"));
+            const el = document.getElementById('constPracticeInput');
+            el.className = `code-input w-full max-w-2xl rounded-xl mx-2 my-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
+            setFeedback('feedback-constPractice', ok, ok ? 'إجابة ممتازة وصحيحة!' : 'تأكدي من استخدام Const واسم الثابت وتخصيص قيمة نصية بين علامتي تنصيص');
+        }
+
+        // Worksheet 8 Progress Tracking
+        const completedQuestions = {
+            q3: false, q4: false, q5: false, q6: false, q7: false, q8: false, q9: false
+        };
+
+        function updateProgress() {
+            const keys = Object.keys(completedQuestions);
+            const done = keys.filter(k => completedQuestions[k]).length;
+            const el = document.getElementById('scoreText');
+            if (el) el.innerText = `${done} / ${keys.length}`;
+        }
+
+        function checkQ3() {
+            const v1 = clean(document.getElementById('q3_1').value);
+            const v2 = clean(document.getElementById('q3_2').value);
+            const isV1 = v1.includes('snameasstring');
+            const isV2 = v2.includes('sgradeasinteger');
+
+            document.getElementById('q3_1').className = `code-input w-96 rounded-xl mx-2 ${isV1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q3_2').className = `code-input w-96 rounded-xl mx-2 ${isV2 ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (isV1 && isV2) {
+                setFeedback('feedback-q3', true, 'إجابة ممتازة! تم الإعلان عن المتغيرات العامة بنجاح.');
+                completedQuestions.q3 = true;
+            } else {
+                setFeedback('feedback-q3', false, 'راجعي اسم المتغير ونوعه لكل سطر');
+                completedQuestions.q3 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ4() {
+            const v1 = clean(document.getElementById('q4_1').value);
+            const v2 = clean(document.getElementById('q4_2').value);
+            const v3 = clean(document.getElementById('q4_3').value);
+
+            const ok1 = v1.includes('sname=textbox1.text');
+            const ok2 = v2 === 'hide' || v2 === 'me.hide';
+            const ok3 = v3 === 'form2.show';
+
+            document.getElementById('q4_1').className = `code-input w-full max-w-xl rounded-xl mx-2 ${ok1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q4_2').className = `code-input w-80 rounded-xl mx-2 ${ok2 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q4_3').className = `code-input w-80 rounded-xl mx-2 ${ok3 ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok1 && ok2 && ok3) {
+                setFeedback('feedback-q4', true, 'أحسنتِ! تم التخصيص وإخفاء وإظهار النماذج بشكل صحيح.');
+                completedQuestions.q4 = true;
+            } else {
+                setFeedback('feedback-q4', false, 'تأكدي من تخصيص قيمة TextBox1.Text ثم الإخفاء والإظهار');
+                completedQuestions.q4 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ5() {
+            const v1 = clean(document.getElementById('q5_1').value);
+            const v2 = clean(document.getElementById('q5_2').value);
+            const v3 = clean(document.getElementById('q5_3').value);
+
+            const ok1 = v1.includes('sgrade=sgrade+1') || v1.includes('sgrade+=1');
+            const ok2 = v2 === 'hide' || v2 === 'me.hide';
+            const ok3 = v3 === 'form3.show';
+
+            document.getElementById('q5_1').className = `code-input w-full max-w-xl rounded-xl mx-2 ${ok1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q5_2').className = `code-input w-80 rounded-xl mx-2 ${ok2 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q5_3').className = `code-input w-80 rounded-xl mx-2 ${ok3 ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok1 && ok2 && ok3) {
+                setFeedback('feedback-q5', true, 'رائع جداً! تم زيادة درجة sgrade والتنقل إلى النموذج التالي.');
+                completedQuestions.q5 = true;
+            } else {
+                setFeedback('feedback-q5', false, 'تأكدي من الجمع التراكمي: المتغير = المتغير + 1 ثم الانتقال');
+                completedQuestions.q5 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ6() {
+            const v1 = clean(document.getElementById('q6_1').value);
+            const v2 = clean(document.getElementById('q6_2').value);
+            const v3 = clean(document.getElementById('q6_3').value);
+
+            const ok1 = v1.includes('msgbox') && (v1.includes('غيرصحيح') || v1.includes('خاطئ') || v1.includes('خطأ') || v1.includes('إجابةغيرصحيحة') || v1.includes('اجابةخاطئة'));
+            const ok2 = v2 === 'hide' || v2 === 'me.hide';
+            const ok3 = v3 === 'form3.show';
+
+            document.getElementById('q6_1').className = `code-input w-full max-w-2xl rounded-xl mx-2 ${ok1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q6_2').className = `code-input w-80 rounded-xl mx-2 ${ok2 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q6_3').className = `code-input w-80 rounded-xl mx-2 ${ok3 ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok1 && ok2 && ok3) {
+                setFeedback('feedback-q6', true, 'صحيح تماماً! تم إظهار رسالة الخطأ والانتقال للنموذج التالي.');
+                completedQuestions.q6 = true;
+            } else {
+                setFeedback('feedback-q6', false, 'اكتبي دالة الرسالة MsgBox مع نص يفيد بأن الإجابة غير صحيحة');
+                completedQuestions.q6 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ7() {
+            const v1 = clean(document.getElementById('q7_1').value);
+            const v2 = clean(document.getElementById('q7_2').value);
+            const v3 = clean(document.getElementById('q7_3').value);
+
+            const ok1 = v1.includes('sgrade=sgrade+1') || v1.includes('sgrade+=1');
+            const ok2 = v2 === 'form4.show';
+            const ok3 = v3.includes('msgbox');
+
+            document.getElementById('q7_1').className = `code-input w-full max-w-xl rounded-xl mx-2 ${ok1 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q7_2').className = `code-input w-80 rounded-xl mx-2 ${ok2 ? 'correct-answer' : 'wrong-answer'}`;
+            document.getElementById('q7_3').className = `code-input w-full max-w-2xl rounded-xl mx-2 ${ok3 ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok1 && ok2 && ok3) {
+                setFeedback('feedback-q7', true, 'إجابة نموذجية! تم برمجة أزرار السؤال الثاني بالكامل.');
+                completedQuestions.q7 = true;
+            } else {
+                setFeedback('feedback-q7', false, 'تأكدي من زيادة الدرجة والإظهار للزر الصحيح، ورسالة التحذير للزر الخاطئ');
+                completedQuestions.q7 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ8() {
+            const v = clean(document.getElementById('q8_1').value);
+            const ok = v.includes('sname') && v.includes('sgrade') && v.includes('&');
+            document.getElementById('q8_1').className = `code-input w-full max-w-3xl rounded-xl mx-2 my-1 ${ok ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok) {
+                setFeedback('feedback-q8', true, 'ممتاز! تم ربط المتغيرات بمعامل الربط النصي (&).');
+                completedQuestions.q8 = true;
+            } else {
+                setFeedback('feedback-q8', false, 'تأكدي من استخدام معامل الربط (&) لدمج اسم الطالبة مع درجتها');
+                completedQuestions.q8 = false;
+            }
+            updateProgress();
+        }
+
+        function checkQ9() {
+            const v = clean(document.getElementById('q9_1').value);
+            const ok = v === 'end' || v === 'application.exit';
+            document.getElementById('q9_1').className = `code-input w-56 rounded-xl mx-2 font-bold text-center ${ok ? 'correct-answer' : 'wrong-answer'}`;
+
+            if (ok) {
+                setFeedback('feedback-q9', true, 'أحسنتِ! التعليمة تُنهي تشغيل المشروع بالكامل.');
+                completedQuestions.q9 = true;
+            } else {
+                setFeedback('feedback-q9', false, 'اكتبي تعليمة إنهاء البرنامج');
+                completedQuestions.q9 = false;
+            }
+            updateProgress();
+        }
+
+        function revealAllSolutions() {
+            document.getElementById('q3_1').value = 'sname As String';
+            document.getElementById('q3_2').value = 'sgrade As Integer';
+
+            document.getElementById('q4_1').value = 'sname = TextBox1.Text';
+            document.getElementById('q4_2').value = 'Me.Hide()';
+            document.getElementById('q4_3').value = 'Form2.Show()';
+
+            document.getElementById('q5_1').value = 'sgrade = sgrade + 1';
+            document.getElementById('q5_2').value = 'Me.Hide()';
+            document.getElementById('q5_3').value = 'Form3.Show()';
+
+            document.getElementById('q6_1').value = 'MsgBox("إجابة غير صحيحة")';
+            document.getElementById('q6_2').value = 'Me.Hide()';
+            document.getElementById('q6_3').value = 'Form3.Show()';
+
+            document.getElementById('q7_1').value = 'sgrade = sgrade + 1';
+            document.getElementById('q7_2').value = 'Form4.Show()';
+            document.getElementById('q7_3').value = 'MsgBox("إجابة غير صحيحة")';
+
+            document.getElementById('q8_1').value = 'sname & " حصلت على درجة " & sgrade';
+            document.getElementById('q9_1').value = 'End';
+
+            checkQ3(); checkQ4(); checkQ5(); checkQ6(); checkQ7(); checkQ8(); checkQ9();
+        }
+
+        let simState = { currentForm: 1, sname: '', sgrade: 0 };
+
+        function renderSimForm() {
+            const body = document.getElementById('simBody');
+            const title = document.getElementById('simTitle');
+            if (!body || !title) return;
+
+            if (simState.currentForm === 1) {
+                title.innerText = 'بنك المعلومات - Form1';
+                body.innerHTML = `
+                    <div class="w-full space-y-5">
+                        <div class="text-lg font-bold text-slate-800">نافذة تسجيل اسم المتعلم (Form1)</div>
+                        <div class="flex items-center justify-center gap-3">
+                            <label class="text-lg font-bold text-slate-700">الاسم :</label>
+                            <input id="simNameInput" type="text" value="${simState.sname}" placeholder="اكتبي اسم الطالبة هنا..." class="px-4 py-2.5 border-2 border-slate-300 rounded-xl text-lg bg-white focus:outline-blue-600 w-72 text-center font-bold text-slate-900" />
+                        </div>
+                        <div>
+                            <button onclick="simGoForm2()" class="px-10 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-black text-lg shadow-md transition active:scale-95">
+                                دخول
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (simState.currentForm === 2) {
+                title.innerText = 'السؤال الأول - Form2';
+                body.innerHTML = `
+                    <div class="w-full space-y-4">
+                        <div class="bg-blue-100 text-blue-950 py-3 px-4 rounded-xl text-lg font-black border border-blue-200">
+                            س1: لتخزين عنوان المتعلم نستخدم متغيراً من نوع:
+                        </div>
+                        <div class="flex flex-col gap-3 max-w-sm mx-auto">
+                            <button onclick="simAnswerForm2(false)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button1: Date
+                            </button>
+                            <button onclick="simAnswerForm2(true)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button2: String
+                            </button>
+                            <button onclick="simAnswerForm2(false)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button3: Integer
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (simState.currentForm === 3) {
+                title.innerText = 'السؤال الثاني - Form3';
+                body.innerHTML = `
+                    <div class="w-full space-y-4">
+                        <div class="bg-blue-100 text-blue-950 py-3 px-4 rounded-xl text-lg font-black border border-blue-200">
+                            س2: للإعلان عن متغير على مستوى النموذج أو الإجراء نستخدم:
+                        </div>
+                        <div class="flex flex-col gap-3 max-w-sm mx-auto">
+                            <button onclick="simAnswerForm3(true)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button1: Dim
+                            </button>
+                            <button onclick="simAnswerForm3(false)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button2: Me
+                            </button>
+                            <button onclick="simAnswerForm3(false)" class="w-full py-3 bg-slate-200 hover:bg-slate-300 border border-slate-400 rounded-xl text-lg font-bold transition">
+                                Button3: Byte
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (simState.currentForm === 4) {
+                title.innerText = 'النتيجة - Form4';
+                body.innerHTML = `
+                    <div class="w-full space-y-5">
+                        <div class="text-sm text-slate-500 font-code font-bold">حدث Form4_Load قام بربط sname & sgrade في Label1</div>
+                        <div class="bg-yellow-50 border-2 border-yellow-400 p-6 rounded-2xl text-slate-900 font-bold text-xl shadow-sm">
+                            <span class="text-blue-800 text-3xl font-black">${simState.sname || 'فاطمة'}</span> حصلت على درجة : <span class="text-emerald-700 text-4xl font-black">${simState.sgrade} / 2</span>
+                        </div>
+                        <div>
+                            <button onclick="simExit()" class="px-10 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-black text-lg shadow transition active:scale-95">
+                                خروج (End)
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (simState.currentForm === 5) {
+                title.innerText = 'انتهى تشغيل البرنامج';
+                body.innerHTML = `
+                    <div class="py-8 space-y-3">
+                        <span class="text-7xl">🛑</span>
+                        <div class="font-black text-slate-800 text-2xl">تم إنهاء البرنامج بنجاح بالتعليمة (End)</div>
+                        <button onclick="resetSim()" class="text-lg font-bold text-blue-600 hover:underline">إعادة تشغيل المحاكي من البداية</button>
+                    </div>
+                `;
+            }
+        }
+
+        function simGoForm2() {
+            const nameInput = document.getElementById('simNameInput');
+            simState.sname = nameInput ? nameInput.value.trim() || 'فاطمة' : 'فاطمة';
+            simState.currentForm = 2;
+            renderSimForm();
+        }
+
+        function simAnswerForm2(isCorrect) {
+            if (isCorrect) {
+                simState.sgrade += 1;
+                showSimModal('أحسنت إجابة صحيحة!', () => {
+                    simState.currentForm = 3;
+                    renderSimForm();
+                });
+            } else {
+                showSimModal('إجابة غير صحيحة!', () => {
+                    simState.currentForm = 3;
+                    renderSimForm();
+                });
+            }
+        }
+
+        function simAnswerForm3(isCorrect) {
+            if (isCorrect) {
+                simState.sgrade += 1;
+                showSimModal('أحسنت إجابة صحيحة!', () => {
+                    simState.currentForm = 4;
+                    renderSimForm();
+                });
+            } else {
+                showSimModal('إجابة غير صحيحة!', () => {
+                    simState.currentForm = 4;
+                    renderSimForm();
+                });
+            }
+        }
+
+        function simExit() {
+            simState.currentForm = 5;
+            renderSimForm();
+        }
+
+        function resetSim() {
+            simState = { currentForm: 1, sname: '', sgrade: 0 };
+            renderSimForm();
+        }
+
+        // Custom Visual Basic Style Dialog
+        function showSimModal(text, onOk) {
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 z-50';
+            overlay.innerHTML = `
+                <div class="bg-white border-2 border-slate-600 rounded-2xl shadow-2xl p-6 max-w-sm w-full text-right text-slate-900">
+                    <div class="text-xs font-black text-slate-800 mb-3 border-b pb-2 flex items-center justify-between">
+                        <span>Microsoft Visual Basic</span>
+                        <span class="text-blue-600 font-bold text-lg">ℹ</span>
+                    </div>
+                    <p class="text-xl font-black text-slate-850 my-4 text-center leading-relaxed">${text}</p>
+                    <div class="text-center pt-2">
+                        <button id="modalOkBtn" class="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl text-base font-bold shadow-md transition active:scale-95">
+                            موافق
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            document.getElementById('modalOkBtn').focus();
+            document.getElementById('modalOkBtn').onclick = () => {
+                overlay.remove();
+                if (onOk) onOk();
+            };
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            handleClassChange();
+            renderSimForm();
+            updateProgress();
+            updateTimerDisplay();
+            renderScrambledWords();
+        });
+    </script>
+</body>
+</html>
