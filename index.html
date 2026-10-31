@@ -26,9 +26,17 @@
             background: linear-gradient(145deg, #070d18, #0f172a);
             color: #f8fafc;
             border: 2px solid #334155;
-            font-size: 1.35rem;
-            line-height: 2.6rem;
+            font-size: 1.15rem;
+            line-height: 2.3rem;
             letter-spacing: 0.5px;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        @media (min-width: 768px) {
+            .code-block {
+                font-size: 1.35rem;
+                line-height: 2.6rem;
+            }
         }
         .code-input {
             direction: ltr !important;
@@ -37,16 +45,28 @@
             background-color: #1e293b;
             color: #38bdf8;
             border: 2px solid #64748b;
-            padding: 0.6rem 1rem;
-            font-size: 1.25rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 1.05rem;
             font-weight: 700;
             transition: all 0.25s ease;
+            max-width: 100%;
+        }
+        @media (min-width: 768px) {
+            .code-input {
+                font-size: 1.25rem;
+                padding: 0.6rem 1rem;
+            }
         }
         .code-input::placeholder {
             color: #64748b;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-style: italic;
             font-weight: 400;
+        }
+        @media (min-width: 768px) {
+            .code-input::placeholder {
+                font-size: 1.05rem;
+            }
         }
         .code-input:focus {
             outline: none;
@@ -110,8 +130,8 @@
                         </div>
                         <h1 class="text-2xl md:text-3xl font-black text-white mt-1 tracking-wide">تابع: المتغيرات + الثوابت</h1>
                         <div class="mt-1 flex items-center gap-2">
-                            <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs md:text-sm font-black px-3 py-0.5 rounded-lg shadow-sm">
-                                👩‍🏫 إعداد وتصميم: أ. وفاء عليان
+                            <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs md:text-sm font-black px-3.5 py-1 rounded-lg shadow-sm">
+                                👩‍🏫 إعداد وتصميم: أ. وفاء عليان - قسم الحاسوب
                             </span>
                         </div>
                     </div>
@@ -157,17 +177,17 @@
             </div>
 
             <!-- Tab Navigation Buttons -->
-            <div class="mt-4 flex flex-wrap gap-3 border-t border-slate-800/80 pt-3 justify-center md:justify-start">
-                <button onclick="switchTab('tab-warmup')" id="btn-warmup" class="tab-btn active px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+            <div class="mt-4 flex flex-wrap gap-2 md:gap-3 border-t border-slate-800/80 pt-3 justify-center md:justify-start">
+                <button onclick="switchTab('tab-warmup')" id="btn-warmup" class="tab-btn active w-full sm:w-auto px-4 sm:px-7 py-2.5 sm:py-3 rounded-2xl font-black text-base sm:text-lg md:text-xl transition flex items-center justify-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
                     <span>🎯</span> المقدمة والنشاط الاستهلالي
                 </button>
-                <button onclick="switchTab('tab-worksheet')" id="btn-worksheet" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                <button onclick="switchTab('tab-worksheet')" id="btn-worksheet" class="tab-btn w-full sm:w-auto px-4 sm:px-7 py-2.5 sm:py-3 rounded-2xl font-black text-base sm:text-lg md:text-xl transition flex items-center justify-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
                     <span>📝</span> ورقة عمل (8) التفاعلية
                 </button>
-                <button onclick="switchTab('tab-constants')" id="btn-constants" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                <button onclick="switchTab('tab-constants')" id="btn-constants" class="tab-btn w-full sm:w-auto px-4 sm:px-7 py-2.5 sm:py-3 rounded-2xl font-black text-base sm:text-lg md:text-xl transition flex items-center justify-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
                     <span>📘</span> درس الثوابت (Constants)
                 </button>
-                <button onclick="switchTab('tab-summary')" id="btn-summary" class="tab-btn px-7 py-3 rounded-2xl font-black text-lg md:text-xl transition flex items-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
+                <button onclick="switchTab('tab-summary')" id="btn-summary" class="tab-btn w-full sm:w-auto px-4 sm:px-7 py-2.5 sm:py-3 rounded-2xl font-black text-base sm:text-lg md:text-xl transition flex items-center justify-center gap-2 border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 shadow-md">
                     <span>🎓</span> الأسئلة الختامية (الأحداث ومعلومات الدرس)
                 </button>
             </div>
@@ -304,13 +324,13 @@
                         أكملي كتابة التعليمة البرمجية للإعلان عن المتغير العام داخل الوحدة النمطية <code class="font-code font-bold text-blue-300">Module</code>:
                     </p>
 
-                    <div class="code-block rounded-2xl p-6 shadow-2xl">
+                    <div class="code-block rounded-2xl p-4 sm:p-6 shadow-2xl">
                         <span class="syn-kw">Module</span> <span class="text-slate-100 font-bold">Module1</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm">' الإعلان العام على مستوى المشروع:</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> 
-                        <input id="warmup_q1_var" type="text" placeholder="اسم المتغير..." class="code-input w-48 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /> 
+                        <input id="warmup_q1_var" type="text" placeholder="اسم المتغير..." class="code-input w-full max-w-[170px] sm:max-w-[200px] rounded-xl mx-1 sm:mx-2 text-center inline-block my-1" autocomplete="off" spellcheck="false" /> 
                         <span class="syn-kw">As</span> 
-                        <input id="warmup_q1_type" type="text" placeholder="نوع البيانات..." class="code-input w-48 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /><br>
+                        <input id="warmup_q1_type" type="text" placeholder="نوع البيانات..." class="code-input w-full max-w-[170px] sm:max-w-[200px] rounded-xl mx-1 sm:mx-2 text-center inline-block my-1" autocomplete="off" spellcheck="false" /><br>
                         <span class="syn-kw">End Module</span>
                     </div>
 
@@ -363,14 +383,14 @@
                         أكملي التعليمات البرمجية لتنفيذ عمليتي إخفاء النموذج الحالي وإظهار النموذج الثاني:
                     </p>
 
-                    <div class="code-block rounded-2xl p-6 shadow-2xl space-y-3">
-                        <div>
-                            <span class="syn-comm block mb-1">' 1. إخفاء النموذج الحالي:</span>
-                            <span class="syn-var">Me</span>.<input id="warmup_q3_1" type="text" placeholder="اكتبي التعليمة..." class="code-input w-64 rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                    <div class="code-block rounded-2xl p-4 sm:p-6 shadow-2xl space-y-3">
+                        <div class="flex flex-wrap items-center gap-1">
+                            <span class="syn-comm block w-full mb-1">' 1. إخفاء النموذج الحالي:</span>
+                            <span class="syn-var">Me</span>.<input id="warmup_q3_1" type="text" placeholder="اكتبي التعليمة..." class="code-input w-full sm:w-64 rounded-xl mx-1" autocomplete="off" spellcheck="false" />
                         </div>
-                        <div>
-                            <span class="syn-comm block mb-1">' 2. إظهار النموذج الثاني:</span>
-                            <span class="syn-var">Form2</span>.<input id="warmup_q3_2" type="text" placeholder="اكتبي التعليمة..." class="code-input w-64 rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                        <div class="flex flex-wrap items-center gap-1">
+                            <span class="syn-comm block w-full mb-1">' 2. إظهار النموذج الثاني:</span>
+                            <span class="syn-var">Form2</span>.<input id="warmup_q3_2" type="text" placeholder="اكتبي التعليمة..." class="code-input w-full sm:w-64 rounded-xl mx-1" autocomplete="off" spellcheck="false" />
                         </div>
                     </div>
 
@@ -506,10 +526,10 @@
                     أضف وحدة نمطية «Module» للمشروع وأعلن عن متغيرين أحدهما <code class="font-code text-cyan-400 font-bold">sname</code> من نوع <code class="font-code text-emerald-400 font-bold">String</code> والثاني <code class="font-code text-cyan-400 font-bold">sgrade</code> من نوع <code class="font-code text-emerald-400 font-bold">Integer</code>:
                 </p>
 
-                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                <div class="code-block rounded-2xl p-4 sm:p-6 shadow-2xl">
                     <span class="syn-kw">Module</span> <span class="text-slate-100 font-bold">Module1</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_1" type="text" placeholder="اكتبي التعليمة الأولى..." class="code-input w-96 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_2" type="text" placeholder="اكتبي التعليمة الثانية..." class="code-input w-96 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_1" type="text" placeholder="اكتبي التعليمة الأولى..." class="code-input w-full max-w-full sm:max-w-md rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-kw">Public</span> <input id="q3_2" type="text" placeholder="اكتبي التعليمة الثانية..." class="code-input w-full max-w-full sm:max-w-md rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Module</span>
                 </div>
 
@@ -536,10 +556,10 @@
                 <div class="code-block rounded-2xl p-6 shadow-2xl">
                     <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' تخصيص القيمة المدخلة في مربع النص للمتغير sname:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_1" type="text" placeholder="اكتبي تعليمة التخصيص..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_1" type="text" placeholder="اكتبي تعليمة التخصيص..." class="code-input w-full max-w-xl rounded-xl mx-1 sm:mx-2" autocomplete="off" spellcheck="false" /><br><br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج الأول وإظهار النموذج الثاني:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q4_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Sub</span>
                 </div>
 
@@ -566,10 +586,10 @@
                 <div class="code-block rounded-2xl p-6 shadow-2xl">
                     <span class="syn-kw">Private Sub</span> Button2_Click(...) <span class="syn-kw">Handles</span> Button2.Click<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' الجمع التراكمي لدرجة الطالبة (إضافة 1):</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_1" type="text" placeholder="اكتبي تعليمة الجمع التراكمي..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_1" type="text" placeholder="اكتبي تعليمة الجمع التراكمي..." class="code-input w-full max-w-xl rounded-xl mx-1 sm:mx-2" autocomplete="off" spellcheck="false" /><br><br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج الحالي وإظهار النموذج الثالث:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q5_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Sub</span>
                 </div>
 
@@ -596,10 +616,10 @@
                 <div class="code-block rounded-2xl p-6 shadow-2xl">
                     <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إظهار رسالة بأن الإجابة غير صحيحة:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_1" type="text" placeholder="اكتبي تعليمة إظهار الرسالة..." class="code-input w-full max-w-2xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_1" type="text" placeholder="اكتبي تعليمة إظهار الرسالة..." class="code-input w-full max-w-2xl rounded-xl mx-1 sm:mx-2" autocomplete="off" spellcheck="false" /><br><br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إخفاء النموذج وإظهار النموذج الثالث:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-80 rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_2" type="text" placeholder="اكتبي تعليمة الإخفاء..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q6_3" type="text" placeholder="اكتبي تعليمة الإظهار..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-1" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Sub</span>
                 </div>
 
@@ -623,12 +643,12 @@
                     انتقل للنموذج الثالث «Form3» واكتب التعليمات البرمجية للأزرار الثلاثة، كما في النموذج الثاني مع مراعاة الإجابة الصحيحة (زر Dim):
                 </p>
 
-                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                <div class="code-block rounded-2xl p-4 sm:p-6 shadow-2xl">
                     <span class="syn-comm block mb-2">' زر الإجابة الصحيحة Button1 (Dim):</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_1" type="text" placeholder="اكتبي تعليمة زيادة الدرجة..." class="code-input w-full max-w-xl rounded-xl mx-2" autocomplete="off" spellcheck="false" /><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_2" type="text" placeholder="اكتبي تعليمة إظهار النموذج التالي..." class="code-input w-80 rounded-xl mx-2 my-2" autocomplete="off" spellcheck="false" /><br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_1" type="text" placeholder="اكتبي تعليمة زيادة الدرجة..." class="code-input w-full max-w-xl rounded-xl mx-1 sm:mx-2" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_2" type="text" placeholder="اكتبي تعليمة إظهار النموذج التالي..." class="code-input w-full sm:w-80 rounded-xl mx-1 sm:mx-2 my-2" autocomplete="off" spellcheck="false" /><br><br>
                     <span class="syn-comm block mb-2">' أزرار الإجابات الخاطئة Button2 و Button3:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_3" type="text" placeholder="اكتبي تعليمة رسالة الخطأ..." class="code-input w-full max-w-2xl rounded-xl mx-2" autocomplete="off" spellcheck="false" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q7_3" type="text" placeholder="اكتبي تعليمة رسالة الخطأ..." class="code-input w-full max-w-2xl rounded-xl mx-1 sm:mx-2" autocomplete="off" spellcheck="false" />
                 </div>
 
                 <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
@@ -678,10 +698,10 @@
                     انتقل للنموذج الرابع «Form4» واكتب التعليمات البرمجية على الزر «خروج» لإنهاء البرنامج:
                 </p>
 
-                <div class="code-block rounded-2xl p-6 shadow-2xl">
+                <div class="code-block rounded-2xl p-4 sm:p-6 shadow-2xl">
                     <span class="syn-kw">Private Sub</span> Button1_Click(...) <span class="syn-kw">Handles</span> Button1.Click<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-comm block my-1">' إنهاء تشغيل البرنامج:</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q9_1" type="text" placeholder="اكتبي تعليمة الإنهاء..." class="code-input w-56 rounded-xl mx-2 text-center" autocomplete="off" spellcheck="false" /><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="q9_1" type="text" placeholder="اكتبي تعليمة الإنهاء..." class="code-input w-full sm:w-56 rounded-xl mx-1 sm:mx-2 text-center" autocomplete="off" spellcheck="false" /><br>
                     <span class="syn-kw">End Sub</span>
                 </div>
 
@@ -1062,8 +1082,8 @@
                     <h4 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
                         <span class="text-yellow-400">6.</span> اكتبي المعامل البرمجي المستخدم للدمج والربط بين النصوص والمتغيرات في Visual Basic (مثل دمج sname و sgrade):
                     </h4>
-                    <div class="flex items-center gap-4">
-                        <input id="lesson_q6_input" type="text" placeholder="اكتبي الرمز أو المعامل هنا..." class="code-input w-64 rounded-xl text-center text-xl" autocomplete="off" spellcheck="false">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <input id="lesson_q6_input" type="text" placeholder="اكتبي الرمز أو المعامل هنا..." class="code-input w-full sm:w-64 rounded-xl text-center text-xl" autocomplete="off" spellcheck="false">
                         <span class="text-slate-400 text-sm font-semibold">تلميح: يُكتب على لوحة المفاتيح عبر Shift + 7</span>
                     </div>
                 </div>
@@ -1129,7 +1149,7 @@
         <div class="max-w-4xl mx-auto px-4 space-y-1">
             <p class="font-bold text-slate-300">مادة تقنية المعلومات - الصف الثاني عشر • Visual Basic 2008 Express</p>
             <p class="text-slate-500 font-code font-semibold">الأسبوع السادس: تابع المتغيرات + الثوابت</p>
-            <p class="text-yellow-400 font-bold text-sm pt-2">✨ إعداد وتصميم: أ. وفاء عليان ✨</p>
+            <p class="text-yellow-400 font-bold text-sm pt-2">✨ إعداد وتصميم: أ. وفاء عليان - قسم الحاسوب ✨</p>
         </div>
     </footer>
 
